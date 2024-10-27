@@ -10,13 +10,6 @@ public class MainPanel_MainMenuScene : MovePanel
     public event Action GoToChooseGamePanel_Action;
     public event Action GoToLeadersPanel_Action;
 
-    private ISoundProvider soundProvider;
-
-    public void SetSoundProvider(ISoundProvider soundProvider)
-    {
-        this.soundProvider = soundProvider;
-    }
-
     public override void ActivatePanel()
     {
         base.ActivatePanel();
@@ -35,13 +28,11 @@ public class MainPanel_MainMenuScene : MovePanel
 
     private void HandleGoToChooseGamePanel()
     {
-        soundProvider.PlayOneShot("Click");
         GoToChooseGamePanel_Action?.Invoke();
     }
 
     private void HandleGoToLeadersPanel()
     {
-        soundProvider.PlayOneShot("Click");
         GoToLeadersPanel_Action?.Invoke();
     }
 }

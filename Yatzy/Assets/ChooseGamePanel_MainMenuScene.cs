@@ -9,13 +9,6 @@ public class ChooseGamePanel_MainMenuScene : MovePanel
     [SerializeField] private Button gameBotButton;
     [SerializeField] private Button gameFriendButton;
 
-    private ISoundProvider soundProvider;
-
-    public void SetSoundProvider(ISoundProvider soundProvider)
-    {
-        this.soundProvider = soundProvider;
-    }
-
     public override void ActivatePanel()
     {
         base.ActivatePanel();
@@ -46,7 +39,6 @@ public class ChooseGamePanel_MainMenuScene : MovePanel
 
     private void HandlerClickToBackButton()
     {
-        soundProvider.PlayOneShot("Click");
         OnClickBackButton?.Invoke();
     }
 

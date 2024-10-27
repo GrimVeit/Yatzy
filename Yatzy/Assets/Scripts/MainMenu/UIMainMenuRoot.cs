@@ -4,59 +4,83 @@ using UnityEngine;
 public class UIMainMenuRoot : MonoBehaviour
 {
     [SerializeField] private MainPanel_MainMenuScene mainPanel;
-    [SerializeField] private DailyRewardPanel_MainMenuScene dailyRewardPanel;
-    [SerializeField] private ChooseRouletteColor_MainMenuScene chooseRouletteColorPanel;
-
-    private bool isCooldownDailyRewardPanelActivated;
-    private bool isCooldownDailyBonusPanelActivated;
+    [SerializeField] private RegistrationPanel_MainMenuScene registrationPanel;
+    [SerializeField] private RegistrationDonePanel_MainMenuScene registrationDonePanel;
+    [SerializeField] private LeadersPanel_MainMenuScene leadersPanel;
+    [SerializeField] private ChooseGamePanel_MainMenuScene chooseGamePanel;
 
     private ISoundProvider soundProvider;
-    //private IParticleEffectProvider particleEffectProvider;
 
     private Panel currentPanel;
-
-    public void Initialize()
-    {
-        mainPanel.SetSoundProvider(soundProvider);
-        dailyRewardPanel.SetSoundProvider(soundProvider);
-        chooseRouletteColorPanel.SetSoundProvider(soundProvider);
-
-        mainPanel.Initialize();
-        dailyRewardPanel.Initialize();
-        chooseRouletteColorPanel.Initialize();
-    }
-
-    public void Activate()
-    {
-        mainPanel.GoToChooseGamePanel_Action += HandlerGoToMiniGame;
-
-        dailyRewardPanel.OnClickBackButton += OpenMainPanel;
-
-        OpenMainPanel();
-    }
-
-    public void Deactivate()
-    {
-        mainPanel.GoToChooseGamePanel_Action -= HandlerGoToMiniGame;
-
-        dailyRewardPanel.OnClickBackButton -= OpenMainPanel;
-    }
 
     public void SetSoundProvider(ISoundProvider soundProvider)
     {
         this.soundProvider = soundProvider;
     }
 
-    public void SetParticleEffectProvider(IParticleEffectProvider particleEffectProvider)
+    public void Initialize()
     {
-        //this.particleEffectProvider = particleEffectProvider;
+        mainPanel.Initialize();
+        registrationPanel.Initialize();
+        registrationDonePanel.Initialize();
+        leadersPanel.Initialize();
+        chooseGamePanel.Initialize();
+    }
+
+    public void Activate()
+    {
+        mainPanel.GoToChooseGamePanel_Action += HandleGoToChooseGamePanelFromMainPanel;
+        mainPanel.GoToLeadersPanel_Action += HandleGoToLeadersPanelFromMainPanel;
+
+        registrationDonePanel.OnClickToBackButton += HandleGoToMainPanelFromRegistrationDonePanel;
+        leadersPanel.OnClickBackButton += HandleGoToMainPanelFromLeadersPanel;
+        chooseGamePanel.OnClickBackButton += HandleGoToMainPanelFromChooseGamePanel;
+    }
+
+    public void Deactivate()
+    {
+        mainPanel.GoToChooseGamePanel_Action -= HandleGoToChooseGamePanelFromMainPanel;
+        mainPanel.GoToLeadersPanel_Action -= HandleGoToLeadersPanelFromMainPanel;
+
+        registrationDonePanel.OnClickToBackButton -= HandleGoToMainPanelFromRegistrationDonePanel;
+        leadersPanel.OnClickBackButton -= HandleGoToMainPanelFromLeadersPanel;
+        chooseGamePanel.OnClickBackButton -= HandleGoToMainPanelFromChooseGamePanel;
+
+        currentPanel.DeactivatePanel();
     }
 
     public void Dispose()
     {
         mainPanel.Dispose();
-        dailyRewardPanel.Dispose();
-        chooseRouletteColorPanel.Dispose();
+        registrationPanel.Dispose();
+        registrationDonePanel.Dispose();
+        leadersPanel.Dispose();
+        chooseGamePanel.Dispose();
+    }
+
+    public void OpenMainPanel()
+    {
+        OpenPanel(mainPanel);
+    }
+
+    public void OpenChooseGamePanel()
+    {
+        OpenPanel(chooseGamePanel);
+    }
+
+    public void OpenLeadersPanel()
+    {
+        OpenPanel(leadersPanel);
+    }
+
+    public void OpenRegistrationPanel()
+    {
+        OpenPanel(registrationPanel);
+    }
+
+    public void OpenRegistrationDonePanel()
+    {
+        OpenPanel(registrationDonePanel);
     }
 
 
@@ -65,7 +89,6 @@ public class UIMainMenuRoot : MonoBehaviour
         if (currentPanel != null)
             currentPanel.DeactivatePanel();
 
-        //soundProvider.PlayOneShot("ShoohPanel_Open");
         currentPanel = panel;
         currentPanel.ActivatePanel();
 
@@ -81,44 +104,58 @@ public class UIMainMenuRoot : MonoBehaviour
         panel.DeactivatePanel();
     }
 
-    public void OpenMainPanel()
-    {
-        OpenPanel(mainPanel);
-    }
-
-    public void OpenDailyRewardPanel()
-    {
-        OpenPanel(dailyRewardPanel);
-    }
-
-    public void OpenChooseRouletteColorPanel()
-    {
-        OpenPanel(chooseRouletteColorPanel);
-    }
-
-
-    private void HandlerGoToMiniGame()
-    {
-        currentPanel.DeactivatePanel();
-
-        GoToMiniGame_Action?.Invoke();
-    }
 
     #region Input Actions
 
-    public event Action OnClickToOpenChooseColorPanel
+    public event Action OnGoToChooseGamePanelFromMainPanel;
+    public event Action OnGoToLeadersPanelFromMainPanel;
+    public event Action OnGoToMainPanelFromRegistrationDonePanel;
+    public event Action OnGoToMainPanelFromChooseGamePanel;
+    public event Action OnGoToMainPanelFromLeadersPanel;
+
+    private void HandleGoToChooseGamePanelFromMainPanel()
     {
-        add { mainPanel.GoToLeadersPanel_Action += value; }
-        remove { mainPanel.GoToLeadersPanel_Action -= value; }
+        OnGoToChooseGamePanelFromMainPanel?.Invoke();
     }
 
-    public event Action OnClickToCloseChooseColorPanel
+    private void HandleGoToLeadersPanelFromMainPanel()
     {
-        add { chooseRouletteColorPanel.OnClickBackButton += value; }
-        remove { chooseRouletteColorPanel.OnClickBackButton -= value; }
+        OnGoToLeadersPanelFromMainPanel?.Invoke();
     }
 
-    public event Action GoToMiniGame_Action;
+    private void HandleGoToMainPanelFromRegistrationDonePanel()
+    {
+        OnGoToMainPanelFromRegistrationDonePanel?.Invoke();
+    }
+
+    private void HandleGoToMainPanelFromLeadersPanel()
+    {
+        OnGoToMainPanelFromLeadersPanel?.Invoke();
+    }
+
+    private void HandleGoToMainPanelFromChooseGamePanel()
+    {
+        OnGoToMainPanelFromChooseGamePanel?.Invoke();
+    }
+
+
+    public event Action OnClickToSoloGame
+    {
+        add { chooseGamePanel.OnClickToGameSoloButton += value; }
+        remove { chooseGamePanel.OnClickToGameSoloButton -= value; }
+    }
+
+    public event Action OnClickToBotGame
+    {
+        add { chooseGamePanel.OnClickToGameBotButton += value; }
+        remove { chooseGamePanel.OnClickToGameBotButton -= value; }
+    }
+
+    public event Action OnClickToFriendGame
+    {
+        add { chooseGamePanel.OnClickToGameFriendButton += value; }
+        remove { chooseGamePanel.OnClickToGameFriendButton -= value; }
+    }
 
     #endregion
 }
