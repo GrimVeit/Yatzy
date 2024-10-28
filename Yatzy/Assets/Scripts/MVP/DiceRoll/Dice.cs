@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Dice : MonoBehaviour
 {
+    public event Action<int> OnClickToDice;
     public event Action<int, DiceData> OnStopRotated;
 
     [SerializeField] private List<Sprite> spritesAnimation = new List<Sprite>();
@@ -17,6 +18,11 @@ public class Dice : MonoBehaviour
     [SerializeField] private float maxTimeReload;
     [SerializeField] private Image diceImage;
 
+    [SerializeField] private Button buttonFreeze;
+    [SerializeField] private Image imageDice;
+    [SerializeField] private Sprite spriteSelect;
+    [SerializeField] private Sprite spriteUnselect;
+
     private IEnumerator rollCoroutine;
 
     private int currentIndexDice;
@@ -24,11 +30,23 @@ public class Dice : MonoBehaviour
     public void Initialize(int index)
     {
         currentIndexDice = index;
+
+        buttonFreeze.onClick.AddListener(HandlerClickToDice);
     }
 
     public void Dispose()
     {
+        buttonFreeze.onClick.RemoveListener(HandlerClickToDice);
+    }
 
+    public void Freese()
+    {
+        imageDice.sprite = spriteSelect;
+    }
+
+    public void Unfreese()
+    {
+        imageDice.sprite = spriteUnselect;
     }
 
     public void Roll()
@@ -60,4 +78,13 @@ public class Dice : MonoBehaviour
 
         OnStopRotated?.Invoke(currentIndexDice, randomData);
     }
+
+    #region Input
+
+    private void HandlerClickToDice()
+    {
+        OnClickToDice?.Invoke(currentIndexDice);
+    }
+
+    #endregion
 }

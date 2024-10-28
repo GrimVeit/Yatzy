@@ -32,18 +32,23 @@ public class DiceRollPresenter
 
     private void ActivateEvents()
     {
-        diceRollView.OnClickToRollButton += diceRollModel.Roll;
-        diceRollView.OnStoppedDice_Action += diceRollModel.OnStopDice;
+        diceRollView.OnClickToRollButton += diceRollModel.StartRoll;
+        diceRollView.OnStoppedDice_Action += diceRollModel.StopRoll;
+        diceRollView.OnClickToDice += diceRollModel.FreezeToggle;
 
-        diceRollModel.OnRoll += diceRollView.Roll;
+        diceRollModel.OnStartRoll_Indexes += diceRollView.Roll;
+        diceRollModel.OnChangedAttemptsCount += diceRollView.OnChangeAttempts;
+        diceRollModel.OnStartRoll += diceRollView.DeactivateButton;
+        diceRollModel.OnActivateRoll += diceRollView.ActivateButton;
+        diceRollModel.OnDeactivateRoll += diceRollView.DeactivateButton;
+
+        diceRollModel.OnFreeseDice += diceRollView.FreezeDice;
+        diceRollModel.OnUnfreeseDice += diceRollView.UnfreeseDice;
     }
 
     private void DeactivateEvents()
     {
-        diceRollView.OnClickToRollButton -= diceRollModel.Roll;
-        diceRollView.OnStoppedDice_Action -= diceRollModel.OnStopDice;
 
-        diceRollModel.OnRoll -= diceRollView.Roll;
     }
 
     #region Input

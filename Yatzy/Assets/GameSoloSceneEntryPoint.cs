@@ -38,7 +38,7 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
         particleEffectPresenter.Initialize();
 
         diceRollPresenter = new DiceRollPresenter
-            (new DiceRollModel(5), 
+            (new DiceRollModel(5, 3), 
             viewContainer.GetView<DiceRollView>());
         diceRollPresenter.Initialize();
 
@@ -79,10 +79,14 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
         sceneRoot.OnClickToBackButton -= HandleGoToMainMenu;
     }
 
+    private void Deactivate()
+    {
+        sceneRoot.Deactivate();
+    }
+
     private void Dispose()
     {
         DeactivateEvents();
-        sceneRoot.Deactivate();
 
         sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
@@ -105,6 +109,7 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
 
     private void HandleGoToMainMenu()
     {
+        Deactivate();
         GoToMainMenu_Action?.Invoke();
     }
 

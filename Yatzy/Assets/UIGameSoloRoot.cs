@@ -4,6 +4,8 @@ using UnityEngine;
 public class UIGameSoloRoot : MonoBehaviour
 {
     [SerializeField] private MainPanel_GameSoloScene mainPanel;
+    [SerializeField] private RollPanel_GameSoloScene rollPanel;
+    [SerializeField] private RollPlayPanel_GameSoloScene rollPlayPanel;
 
     private ISoundProvider soundProvider;
 
@@ -17,26 +19,51 @@ public class UIGameSoloRoot : MonoBehaviour
     public void Initialize()
     {
         mainPanel.Initialize();
+        rollPlayPanel.Initialize();
+        rollPanel.Initialize();
     }
 
     public void Activate()
     {
         OpenMainPanel();
+        OpenRollPanel();
     }
 
     public void Deactivate()
     {
-
+        currentPanel.DeactivatePanel();
     }
 
     public void Dispose()
     {
         mainPanel.Dispose();
+        rollPanel.Dispose();
+        rollPlayPanel.Dispose();
     }
 
     public void OpenMainPanel()
     {
         OpenPanel(mainPanel);
+    }
+
+    public void OpenRollPanel()
+    {
+        if (rollPlayPanel.IsActivePanel)
+        {
+            CloseOtherPanel(rollPlayPanel);
+        }
+
+        OpenOtherPanel(rollPanel);
+    }
+
+    public void OpenPlayRollPanel()
+    {
+        if (rollPanel.IsActivePanel)
+        {
+            CloseOtherPanel(rollPanel);
+        }
+
+        OpenOtherPanel(rollPlayPanel);
     }
 
 
