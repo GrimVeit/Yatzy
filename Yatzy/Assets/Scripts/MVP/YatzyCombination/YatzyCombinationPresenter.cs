@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 public class YatzyCombinationPresenter
 {
@@ -17,6 +15,7 @@ public class YatzyCombinationPresenter
     {
         ActivateEvents();
 
+        yatzyCombinationModel.Initialize();
         yatzyCombinationView.Initialize();
     }
 
@@ -24,17 +23,31 @@ public class YatzyCombinationPresenter
     {
         DeactivateEvents();
 
+        yatzyCombinationModel.Dispose();
         yatzyCombinationView.Dispose();
     }
 
     private void ActivateEvents()
     {
+        yatzyCombinationModel.OnInitialize += yatzyCombinationView.InitializeYatzyCombinations;
+
+        yatzyCombinationView.OnChooseCombination += yatzyCombinationModel.SelectCombinationForFreeze;
+        yatzyCombinationView.OnClickToPlay += yatzyCombinationModel.SubmitChooseCombinationToFreeze;
+
         yatzyCombinationModel.OnSetNumbersCombination += yatzyCombinationView.SetNumbersCombination;
+
+        yatzyCombinationModel.OnSelectCombination_Index += yatzyCombinationView.Select;
+        yatzyCombinationModel.OnUnselectCombination_Index += yatzyCombinationView.Unselect;
+        yatzyCombinationModel.OnFreezeCombination_Index += yatzyCombinationView.Freeze;
+
+        yatzyCombinationModel.OnSelectCombination += yatzyCombinationView.ActivateButtonPlay;
+        yatzyCombinationModel.OnUnselectCombination += yatzyCombinationView.DeactivateButtonPlay;
+        yatzyCombinationModel.OnFreezeCombination += yatzyCombinationView.DeactivateButtonPlay;
     }
 
     private void DeactivateEvents()
     {
-        yatzyCombinationModel.OnSetNumbersCombination -= yatzyCombinationView.SetNumbersCombination;
+
     }
 
     #region Input
@@ -42,6 +55,50 @@ public class YatzyCombinationPresenter
     public void SetNumbersCombination(int[] numbers)
     {
         yatzyCombinationModel.SetNumbersCombination(numbers);
+    }
+
+    public void Activate()
+    {
+        yatzyCombinationModel.Activate();
+    }
+
+    public void Deactivate()
+    {
+        yatzyCombinationModel.Deactivate();
+    }
+
+    public void SelectBestCombination()
+    {
+        yatzyCombinationModel.SelectBestCombinationForFreeze();
+    }
+
+    public void SubmitFreezeCombination()
+    {
+        yatzyCombinationModel.SubmitChooseCombinationToFreeze();
+    }
+
+    public event Action OnSelectCombination
+    {
+        add { yatzyCombinationModel.OnSelectCombination += value; }
+        remove { yatzyCombinationModel.OnSelectCombination -= value; }
+    }
+
+    public event Action OnFreezeYatzyCombination
+    {
+        add { yatzyCombinationModel.OnFreezeCombination += value; }
+        remove { yatzyCombinationModel.OnFreezeCombination -= value; }
+    }
+
+    public event Action OnFinishGame
+    {
+        add { yatzyCombinationModel.OnFinishGame += value; }
+        remove { yatzyCombinationModel.OnFinishGame -= value; }
+    }
+
+    public event Action<int> OnGetScore
+    {
+        add { yatzyCombinationModel.OnGetScore += value; }
+        remove { yatzyCombinationModel.OnGetScore -= value; }
     }
 
     #endregion

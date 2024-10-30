@@ -1,18 +1,18 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainPanel_GameSoloScene : MovePanel
+public class FinishPanel_GameSoloScene : MovePanel
 {
     [SerializeField] private Button buttonBack;
+    [SerializeField] private Button buttonRestart;
 
     public override void Initialize()
     {
         base.Initialize();
 
         buttonBack.onClick.AddListener(HandlerClickToBackButton);
+        buttonRestart.onClick.AddListener(HandlerClickToRestartButton);
     }
 
     public override void Dispose()
@@ -20,15 +20,22 @@ public class MainPanel_GameSoloScene : MovePanel
         base.Dispose();
 
         buttonBack.onClick.RemoveListener(HandlerClickToBackButton);
+        buttonRestart.onClick.RemoveListener(HandlerClickToRestartButton);
     }
 
     #region Input
 
-    public event Action OnClickToGoMainMenu;
+    public event Action OnGoToMainMenu;
+    public event Action OnGoToSoloGame;
 
     private void HandlerClickToBackButton()
     {
-        OnClickToGoMainMenu?.Invoke();
+        OnGoToMainMenu?.Invoke();
+    }
+
+    private void HandlerClickToRestartButton()
+    {
+        OnGoToSoloGame?.Invoke();
     }
 
     #endregion

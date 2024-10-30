@@ -49,6 +49,16 @@ public class Dice : MonoBehaviour
         imageDice.sprite = spriteUnselect;
     }
 
+    public void ActivateButton()
+    {
+        buttonFreeze.enabled = true;
+    }
+
+    public void DeactivateButton()
+    {
+        buttonFreeze.enabled = false;
+    }
+
     public void Roll()
     {
         if (rollCoroutine != null)

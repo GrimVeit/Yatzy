@@ -4,8 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DiceRollView : View
+public class DiceRollView : View, IIdentify
 {
+    public string GetID() => idComponent;
+
+    [SerializeField] private string idComponent;
+
     public event Action<int, DiceData> OnStoppedDice_Action;
 
     [SerializeField] private List<Dice> dices = new List<Dice>();

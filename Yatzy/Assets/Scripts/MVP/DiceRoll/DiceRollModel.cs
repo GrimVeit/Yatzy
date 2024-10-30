@@ -12,6 +12,9 @@ public class DiceRollModel
     public event Action<int> OnUnfreeseDice;
 
     //Попытки кручения кубиков
+    public event Action OnGetFullAttempt;
+    public event Action OnLoseFirstAttempt;
+
     public event Action OnAttemptAvailable;
     public event Action OnAttemptUnvailable;
     public event Action<int> OnChangedAttemptsCount;
@@ -34,6 +37,8 @@ public class DiceRollModel
     private int fullRollAttemptCount;
     private int fullDiceCount;
 
+    private bool isActiveFreezeToggle;
+
     public DiceRollModel(int fullDiceCount, int fullRollAttempCount)
     {
         this.fullDiceCount = fullDiceCount;
@@ -48,11 +53,22 @@ public class DiceRollModel
     public void Initialize()
     {
         ChangeAttempts(fullRollAttemptCount);
+        OnGetFullAttempt?.Invoke();
     }
 
     public void Dispose()
     {
 
+    }
+
+    public void ActivateFreezeToggle()
+    {
+        isActiveFreezeToggle = true;
+    }
+
+    public void DeactivateFreezeToggle()
+    {
+        isActiveFreezeToggle = false;
     }
 
     public void StartRoll()
@@ -83,6 +99,9 @@ public class DiceRollModel
 
             OnStopRoll?.Invoke();
 
+            if(fullRollAttemptCount - diceRollCurrentAttempt == 1)
+                OnLoseFirstAttempt?.Invoke();
+
             if (!IsAvailableAttempts())
                 OnDeactivateRoll?.Invoke();
             else
@@ -92,11 +111,28 @@ public class DiceRollModel
 
     public void Reload()
     {
+        AllUnfreeze();
+        diceRollCurrentAttempt = 0;
         ChangeAttempts(fullRollAttemptCount);
+        OnGetFullAttempt?.Invoke();
+    }
+
+    private void AllUnfreeze()
+    {
+        for (int i = 0; i < dices.Count; i++)
+        {
+            if (dices[i].Frozen)
+            {
+                OnUnfreeseDice?.Invoke(i);
+                dices[i].SetFrozen(false);
+            }
+        }
     }
 
     public void FreezeToggle(int index)
     {
+        if (!isActiveFreezeToggle) return;
+
         if (dices.ContainsKey(index))
         {
             if (dices[index].Frozen)

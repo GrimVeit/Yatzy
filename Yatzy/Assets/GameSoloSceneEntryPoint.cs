@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameSoloSceneEntryPoint : MonoBehaviour
@@ -17,6 +15,7 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
 
     private DiceRollPresenter diceRollPresenter;
     private YatzyCombinationPresenter yatzyCombinationPresenter;
+    private ScorePresenter scorePresenter;
 
     public void Run(UIRootView uIRootView)
     {
@@ -43,9 +42,14 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
         diceRollPresenter.Initialize();
 
         yatzyCombinationPresenter = new YatzyCombinationPresenter
-            (new YatzyCombinationModel(), 
+            (new YatzyCombinationModel(13), 
             viewContainer.GetView<YatzyCombinationView>());
         yatzyCombinationPresenter.Initialize();
+
+        scorePresenter = new ScorePresenter
+            (new ScoreModel(soundPresenter), 
+            viewContainer.GetView<ScoreView>());
+        scorePresenter.Initialize();
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Initialize();
@@ -60,6 +64,17 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
         ActivateTransitionsSceneEvents();
 
         diceRollPresenter.OnGetAllDiceValues += yatzyCombinationPresenter.SetNumbersCombination;
+
+        diceRollPresenter.OnStartRoll += yatzyCombinationPresenter.Deactivate;
+        diceRollPresenter.OnStopRoll += yatzyCombinationPresenter.Activate;
+        diceRollPresenter.OnStartRoll += diceRollPresenter.DeactivateFreezeToggle;
+        diceRollPresenter.OnStopRoll += diceRollPresenter.ActivateFreezeToggle;
+
+        yatzyCombinationPresenter.OnFreezeYatzyCombination += diceRollPresenter.Reload;
+        yatzyCombinationPresenter.OnFreezeYatzyCombination += yatzyCombinationPresenter.Deactivate;
+        yatzyCombinationPresenter.OnFreezeYatzyCombination += diceRollPresenter.DeactivateFreezeToggle;
+
+        yatzyCombinationPresenter.OnGetScore += scorePresenter.AddScore;
     }
 
     private void DeactivateEvents()
@@ -67,16 +82,38 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
         DeactivateTransitionsSceneEvents();
 
         diceRollPresenter.OnGetAllDiceValues -= yatzyCombinationPresenter.SetNumbersCombination;
+
+        diceRollPresenter.OnStartRoll -= yatzyCombinationPresenter.Deactivate;
+        diceRollPresenter.OnStopRoll -= yatzyCombinationPresenter.Activate;
+        diceRollPresenter.OnStartRoll -= diceRollPresenter.DeactivateFreezeToggle;
+        diceRollPresenter.OnStopRoll -= diceRollPresenter.ActivateFreezeToggle;
+
+        yatzyCombinationPresenter.OnFreezeYatzyCombination -= diceRollPresenter.Reload;
+        yatzyCombinationPresenter.OnFreezeYatzyCombination -= diceRollPresenter.DeactivateFreezeToggle;
+
+        yatzyCombinationPresenter.OnGetScore -= scorePresenter.AddScore;
     }
 
     private void ActivateTransitionsSceneEvents()
     {
-        sceneRoot.OnClickToBackButton += HandleGoToMainMenu;
+        sceneRoot.OnClickToGoMainMenuFromMainPanel += HandleGoToMainMenu;
+        sceneRoot.OnClickToGoMainMenuFromFinishPanel += HandleGoToMainMenu;
+        sceneRoot.OnClickToGoSoloGameFromFinishPanel += HandleGoToSoloGame;
+        yatzyCombinationPresenter.OnFinishGame += sceneRoot.OpenFinishPanel;
+
+        diceRollPresenter.OnGetFullAttempt += sceneRoot.OpenRollPanel;
+        diceRollPresenter.OnLoseFirstAttempt += sceneRoot.OpenPlayRollPanel;
     }
 
     private void DeactivateTransitionsSceneEvents()
     {
-        sceneRoot.OnClickToBackButton -= HandleGoToMainMenu;
+        sceneRoot.OnClickToGoMainMenuFromMainPanel -= HandleGoToMainMenu;
+        sceneRoot.OnClickToGoMainMenuFromFinishPanel -= HandleGoToMainMenu;
+        sceneRoot.OnClickToGoSoloGameFromFinishPanel -= HandleGoToSoloGame;
+        yatzyCombinationPresenter.OnFinishGame -= sceneRoot.OpenFinishPanel;
+
+        diceRollPresenter.OnGetFullAttempt -= sceneRoot.OpenRollPanel;
+        diceRollPresenter.OnLoseFirstAttempt -= sceneRoot.OpenPlayRollPanel;
     }
 
     private void Deactivate()
@@ -95,6 +132,7 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
 
         diceRollPresenter?.Dispose();
         yatzyCombinationPresenter?.Dispose();
+        scorePresenter?.Dispose();
     }
 
     private void OnDestroy()
@@ -104,13 +142,19 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
 
     #region Input actions
 
-    public event Action GoToMainMenu_Action;
-
+    public event Action OnGoToMainMenu;
+    public event Action OnGoToSoloGame;
 
     private void HandleGoToMainMenu()
     {
         Deactivate();
-        GoToMainMenu_Action?.Invoke();
+        OnGoToMainMenu?.Invoke();
+    }
+
+    private void HandleGoToSoloGame()
+    {
+        Deactivate();
+        OnGoToSoloGame?.Invoke();
     }
 
     #endregion

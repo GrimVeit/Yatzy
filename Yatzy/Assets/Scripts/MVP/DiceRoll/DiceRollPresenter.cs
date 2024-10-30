@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class DiceRollPresenter
 {
@@ -38,6 +35,8 @@ public class DiceRollPresenter
 
         diceRollModel.OnStartRoll_Indexes += diceRollView.Roll;
         diceRollModel.OnChangedAttemptsCount += diceRollView.OnChangeAttempts;
+
+        diceRollModel.OnGetFullAttempt += diceRollView.ActivateButton;
         diceRollModel.OnStartRoll += diceRollView.DeactivateButton;
         diceRollModel.OnActivateRoll += diceRollView.ActivateButton;
         diceRollModel.OnDeactivateRoll += diceRollView.DeactivateButton;
@@ -57,6 +56,45 @@ public class DiceRollPresenter
     {
         add { diceRollModel.OnGetAllDiceValues += value; }
         remove { diceRollModel.OnGetAllDiceValues -= value; }
+    }
+
+    public event Action OnGetFullAttempt
+    {
+        add { diceRollModel.OnGetFullAttempt += value; }
+        remove { diceRollModel.OnGetFullAttempt -= value; }
+    }
+
+    public event Action OnLoseFirstAttempt
+    {
+        add { diceRollModel.OnLoseFirstAttempt += value; }
+        remove { diceRollModel.OnLoseFirstAttempt -= value; }
+    }
+
+    public event Action OnStartRoll
+    {
+        add { diceRollModel.OnStartRoll += value; }
+        remove { diceRollModel.OnStartRoll -= value; }
+    }
+
+    public event Action OnStopRoll
+    {
+        add { diceRollModel.OnStopRoll += value; }
+        remove { diceRollModel.OnStopRoll -= value; }
+    }
+
+    public void Reload()
+    {
+        diceRollModel.Reload();
+    }
+
+    public void ActivateFreezeToggle()
+    {
+        diceRollModel.ActivateFreezeToggle();
+    }
+
+    public void DeactivateFreezeToggle()
+    {
+        diceRollModel.DeactivateFreezeToggle();
     }
 
     #endregion

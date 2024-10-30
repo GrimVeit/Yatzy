@@ -13,9 +13,11 @@ public class YatzyCombination_Threes : YatzyCombination
     [SerializeField] private Sprite spriteSelect;
     [SerializeField] private Sprite spriteUnselect;
 
-    public override void Initialize()
+    private YatzyCombinationData yatzyCombinationData;
+
+    public override void Initialize(YatzyCombinationData yatzyCombinationData)
     {
-        base.Initialize();
+        this.yatzyCombinationData = yatzyCombinationData;
 
         buttonChooseCombination.onClick.AddListener(HandlerClickToChooseCombinationButton);
     }
@@ -32,15 +34,19 @@ public class YatzyCombination_Threes : YatzyCombination
         int result = diceValues.Count(d => d == 3) * 3;
 
         textScore.text = result.ToString();
+
+        yatzyCombinationData.SetScore(result);
     }
 
     public override void Select()
     {
+        yatzyCombinationData.SetSelect(true);
         buttonImage.sprite = spriteSelect;
     }
 
     public override void Unselect()
     {
+        yatzyCombinationData.SetSelect(false);
         buttonImage.sprite = spriteUnselect;
     }
 
@@ -48,7 +54,15 @@ public class YatzyCombination_Threes : YatzyCombination
 
     private void HandlerClickToChooseCombinationButton()
     {
-        OnChooseCombination?.Invoke(this);
+        OnChooseCombination?.Invoke(yatzyCombinationData);
+    }
+
+    public override void Freeze()
+    {
+        buttonChooseCombination.enabled = false;
+        buttonImage.sprite = spriteSelect;
+
+        yatzyCombinationData.SetFreeze(true);
     }
 
     #endregion

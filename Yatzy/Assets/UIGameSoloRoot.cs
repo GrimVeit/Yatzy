@@ -4,6 +4,8 @@ using UnityEngine;
 public class UIGameSoloRoot : MonoBehaviour
 {
     [SerializeField] private MainPanel_GameSoloScene mainPanel;
+    [SerializeField] private FinishPanel_GameSoloScene finishPanel;
+
     [SerializeField] private RollPanel_GameSoloScene rollPanel;
     [SerializeField] private RollPlayPanel_GameSoloScene rollPlayPanel;
 
@@ -21,6 +23,7 @@ public class UIGameSoloRoot : MonoBehaviour
         mainPanel.Initialize();
         rollPlayPanel.Initialize();
         rollPanel.Initialize();
+        finishPanel.Initialize();
     }
 
     public void Activate()
@@ -39,11 +42,17 @@ public class UIGameSoloRoot : MonoBehaviour
         mainPanel.Dispose();
         rollPanel.Dispose();
         rollPlayPanel.Dispose();
+        finishPanel.Dispose();
     }
 
     public void OpenMainPanel()
     {
         OpenPanel(mainPanel);
+    }
+
+    public void OpenFinishPanel()
+    {
+        OpenPanel(finishPanel);
     }
 
     public void OpenRollPanel()
@@ -90,10 +99,22 @@ public class UIGameSoloRoot : MonoBehaviour
 
     #region Input Actions
 
-    public event Action OnClickToBackButton
+    public event Action OnClickToGoMainMenuFromMainPanel
     {
-        add { mainPanel.OnClickToBackButton += value; }
-        remove { mainPanel.OnClickToBackButton -= value; }
+        add { mainPanel.OnClickToGoMainMenu += value; }
+        remove { mainPanel.OnClickToGoMainMenu -= value; }
+    }
+
+    public event Action OnClickToGoMainMenuFromFinishPanel
+    {
+        add { finishPanel.OnGoToMainMenu += value; }
+        remove { finishPanel.OnGoToMainMenu -= value; }
+    }
+
+    public event Action OnClickToGoSoloGameFromFinishPanel
+    {
+        add { finishPanel.OnGoToSoloGame += value; }
+        remove { finishPanel.OnGoToSoloGame -= value; }
     }
 
     #endregion
