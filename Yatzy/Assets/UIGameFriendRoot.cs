@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIGameBotRoot : MonoBehaviour
+public class UIGameFriendRoot : MonoBehaviour
 {
     [SerializeField] private MainPanel_GameSoloScene mainPanel;
     [SerializeField] private FinishPanel_GameSoloScene finishWinPanel;

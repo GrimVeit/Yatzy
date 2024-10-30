@@ -41,9 +41,20 @@ public class ScorePresenter
 
     #region Input
 
+    public event Action<int> OnTakeResult
+    {
+        add { scoreModel.OnTakeResult += value; }
+        remove { scoreModel.OnTakeResult -= value; }
+    }
+
     public void AddScore(int score)
     {
         scoreModel.AddScore(score);
+    }
+
+    public void TakeResult()
+    {
+        scoreModel.TakeResult();
     }
 
     #endregion

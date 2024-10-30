@@ -97,5 +97,10 @@ public class DiceRollPresenter
         diceRollModel.DeactivateFreezeToggle();
     }
 
+    public void StartRoll()
+    {
+        diceRollModel.StartRoll();
+    }
+
     #endregion
 }

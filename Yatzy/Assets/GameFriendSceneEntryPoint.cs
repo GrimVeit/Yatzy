@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-public class GameBotSceneEntryPoint : MonoBehaviour
+public class GameFriendSceneEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
-    [SerializeField] private UIGameBotRoot menuRootPrefab;
+    [SerializeField] private UIGameFriendRoot menuRootPrefab;
 
-    private UIGameBotRoot sceneRoot;
+    private UIGameFriendRoot sceneRoot;
     private ViewContainer viewContainer;
 
     private ParticleEffectPresenter particleEffectPresenter;
@@ -43,7 +43,7 @@ public class GameBotSceneEntryPoint : MonoBehaviour
         particleEffectPresenter.Initialize();
 
         gameSessionPresenter = new GameSessionPresenter
-            (new GameSessionModel(), 
+            (new GameSessionModel(),
             viewContainer.GetView<GameSessionView>());
         gameSessionPresenter.Initialize();
 
@@ -112,14 +112,13 @@ public class GameBotSceneEntryPoint : MonoBehaviour
 
 
         //Bot
-        gameSessionPresenter.OnChangedToSecondUser += diceRollPresenter_Bot.StartRoll;
         yatzyCombinationPresenter_Bot.OnFreezeYatzyCombination += gameSessionPresenter.ChangeToFirstUser;
         diceRollPresenter_Bot.OnGetAllDiceValues += yatzyCombinationPresenter_Bot.SetNumbersCombination;
-        diceRollPresenter_Bot.OnStopRoll += yatzyCombinationPresenter_Bot.SelectBestCombination;
+        diceRollPresenter_Bot.OnStartRoll += yatzyCombinationPresenter_Bot.Deactivate;
+        diceRollPresenter_Bot.OnStopRoll += yatzyCombinationPresenter_Bot.Activate;
         diceRollPresenter_Bot.OnStartRoll += diceRollPresenter_Bot.DeactivateFreezeToggle;
         diceRollPresenter_Bot.OnStopRoll += diceRollPresenter_Bot.ActivateFreezeToggle;
 
-        yatzyCombinationPresenter_Bot.OnSelectCombination += yatzyCombinationPresenter_Bot.SubmitFreezeCombination;
         yatzyCombinationPresenter_Bot.OnFreezeYatzyCombination += diceRollPresenter_Bot.Reload;
         yatzyCombinationPresenter_Bot.OnFreezeYatzyCombination += yatzyCombinationPresenter_Bot.Deactivate;
         yatzyCombinationPresenter_Bot.OnFreezeYatzyCombination += diceRollPresenter_Bot.DeactivateFreezeToggle;
@@ -179,9 +178,9 @@ public class GameBotSceneEntryPoint : MonoBehaviour
     {
         sceneRoot.OnClickToGoMainMenuFromMainPanel += HandleGoToMainMenu;
         sceneRoot.OnClickToGoMainMenuFromWinFinishPanel += HandleGoToMainMenu;
-        sceneRoot.OnClickToGoSoloGameFromWinFinishPanel += HandleGoToBotGame;
+        sceneRoot.OnClickToGoSoloGameFromWinFinishPanel += HandleGoToFriendGame;
         sceneRoot.OnClickToGoMainMenuFromLoseFinishPanel += HandleGoToMainMenu;
-        sceneRoot.OnClickToGoSoloGameFromLoseFinishPanel += HandleGoToBotGame;
+        sceneRoot.OnClickToGoSoloGameFromLoseFinishPanel += HandleGoToFriendGame;
 
 
         diceRollPresenter_Me.OnLoseFirstAttempt += sceneRoot.OpenPlayRollPanel_Me;
@@ -201,9 +200,9 @@ public class GameBotSceneEntryPoint : MonoBehaviour
     {
         sceneRoot.OnClickToGoMainMenuFromMainPanel -= HandleGoToMainMenu;
         sceneRoot.OnClickToGoMainMenuFromWinFinishPanel -= HandleGoToMainMenu;
-        sceneRoot.OnClickToGoSoloGameFromWinFinishPanel -= HandleGoToBotGame;
+        sceneRoot.OnClickToGoSoloGameFromWinFinishPanel -= HandleGoToFriendGame;
         sceneRoot.OnClickToGoMainMenuFromLoseFinishPanel -= HandleGoToMainMenu;
-        sceneRoot.OnClickToGoSoloGameFromLoseFinishPanel -= HandleGoToBotGame;
+        sceneRoot.OnClickToGoSoloGameFromLoseFinishPanel -= HandleGoToFriendGame;
 
         diceRollPresenter_Me.OnLoseFirstAttempt -= sceneRoot.OpenPlayRollPanel_Me;
         diceRollPresenter_Bot.OnLoseFirstAttempt -= sceneRoot.OpenPlayRollPanel_Bot;
@@ -245,7 +244,7 @@ public class GameBotSceneEntryPoint : MonoBehaviour
     #region Input actions
 
     public event Action OnGoToMainMenu;
-    public event Action OnGoToBotGame;
+    public event Action OnGoToFriendGame;
 
     private void HandleGoToMainMenu()
     {
@@ -253,10 +252,10 @@ public class GameBotSceneEntryPoint : MonoBehaviour
         OnGoToMainMenu?.Invoke();
     }
 
-    private void HandleGoToBotGame()
+    private void HandleGoToFriendGame()
     {
         Deactivate();
-        OnGoToBotGame?.Invoke();
+        OnGoToFriendGame?.Invoke();
     }
 
     #endregion

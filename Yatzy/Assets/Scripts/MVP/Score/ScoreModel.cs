@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ScoreModel
 {
+    public event Action<int> OnTakeResult;
     public event Action<int> OnChangeScore_Value;
     public event Action OnChangeScore;
 
@@ -36,5 +37,10 @@ public class ScoreModel
         currentRecord += score;
         OnChangeScore?.Invoke();
         OnChangeScore_Value?.Invoke(currentRecord);
+    }
+
+    public void TakeResult()
+    {
+        OnTakeResult?.Invoke(currentRecord);
     }
 }

@@ -57,6 +57,7 @@ public class GameEntryPoint
 
         sceneEntryPoint.GoToSoloGame_Action += () => coroutines.StartCoroutine(LoadAndStartGameSoloScene());
         sceneEntryPoint.GoToBotGame_Action += () => coroutines.StartCoroutine(LoadAndStartGameBotScene());
+        sceneEntryPoint.GoToFriendGame_Action += () => coroutines.StartCoroutine(LoadAndStartGameFriendScene());
 
         yield return rootView.HideLoadingScreen();
     }
@@ -109,10 +110,11 @@ public class GameEntryPoint
         yield return LoadScene(Scenes.GAME_FRIEND);
         yield return null;
 
-        //var sceneEntryPoint = Object.FindObjectOfType<RouletteEntryPoint>();
-        //sceneEntryPoint.Run(rootView);
+        var sceneEntryPoint = Object.FindObjectOfType<GameFriendSceneEntryPoint>();
+        sceneEntryPoint.Run(rootView);
 
-        //sceneEntryPoint.GoToMainMenu_Action += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
+        sceneEntryPoint.OnGoToMainMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
+        sceneEntryPoint.OnGoToFriendGame += () => coroutines.StartCoroutine(LoadAndStartGameFriendScene());
 
         yield return rootView.HideLoadingScreen();
     }

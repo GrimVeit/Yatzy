@@ -50,6 +50,18 @@ public class GameSessionPresenter
         remove { gameSessionModel.OnChangedToFirstUser -= value; }
     }
 
+    public event Action OnWinFirstUser
+    {
+        add { gameSessionModel.OnWinFirstUser += value; }
+        remove { gameSessionModel.OnWinFirstUser -= value; }
+    }
+
+    public event Action OnWinSecondUser
+    {
+        add { gameSessionModel.OnWinSecondUser += value; }
+        remove { gameSessionModel.OnWinSecondUser -= value; }
+    }
+
     public void ChangeToFirstUser()
     {
         gameSessionModel.ChangeToFirstUser();
@@ -58,6 +70,11 @@ public class GameSessionPresenter
     public void ChangeToSecondUser()
     {
         gameSessionModel.ChangeToSecondUser();
+    }
+
+    public void SetScoreResult(int score)
+    {
+        gameSessionModel.SetScore(score);
     }
 
     #endregion

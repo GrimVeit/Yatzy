@@ -59,8 +59,6 @@ public class YatzyCombinationModel
 
     public void SelectBestCombinationForFreeze()
     {
-        if (!isActive) return;
-
         if (currentSelectYatzyCombination != null)
         {
             OnUnselectCombination?.Invoke();
@@ -69,8 +67,8 @@ public class YatzyCombinationModel
         }
 
         currentSelectYatzyCombination = yatzyCombinations.Where(pair => !pair.Value.IsFreeze).OrderByDescending(pair => pair.Value.Score).FirstOrDefault().Value;
-        OnSelectCombination?.Invoke();
         OnSelectCombination_Index?.Invoke(currentSelectYatzyCombination.Index);
+        OnSelectCombination?.Invoke();
     }
 
     public void SelectCombinationForFreeze(YatzyCombinationData yatzyCombination)
