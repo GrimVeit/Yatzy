@@ -1,0 +1,32 @@
+{
+  "project_info": {
+    "project_number": "194379556590",
+    "firebase_url": "https://yatzygame-edab1-default-rtdb.firebaseio.com",
+    "project_id": "yatzygame-edab1",
+    "storage_bucket": "yatzygame-edab1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194379556590:ios:93d7c5bc257910d48635ff",
+        "android_client_info": {
+          "package_name": "Com.YatzyProduction.YatzyGame"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjz_fJ_5fSeF0-sjwl4b-Id-5GtXCnI5o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

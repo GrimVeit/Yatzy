@@ -5,6 +5,7 @@ public class UIMainMenuRoot : MonoBehaviour
 {
     [SerializeField] private MainPanel_MainMenuScene mainPanel;
     [SerializeField] private RegistrationPanel_MainMenuScene registrationPanel;
+    [SerializeField] private ChooseImagePanel_MainMenuScene chooseImagePanel;
     [SerializeField] private RegistrationDonePanel_MainMenuScene registrationDonePanel;
     [SerializeField] private LeadersPanel_MainMenuScene leadersPanel;
     [SerializeField] private ChooseGamePanel_MainMenuScene chooseGamePanel;
@@ -22,6 +23,7 @@ public class UIMainMenuRoot : MonoBehaviour
     {
         mainPanel.Initialize();
         registrationPanel.Initialize();
+        chooseImagePanel.Initialize();
         registrationDonePanel.Initialize();
         leadersPanel.Initialize();
         chooseGamePanel.Initialize();
@@ -33,6 +35,8 @@ public class UIMainMenuRoot : MonoBehaviour
         mainPanel.GoToLeadersPanel_Action += HandleGoToLeadersPanelFromMainPanel;
 
         registrationDonePanel.OnClickToBackButton += HandleGoToMainPanelFromRegistrationDonePanel;
+        registrationPanel.OnClickToChooseImageButton += HandleGoToChooseImagePanelFromRegistrationPanel;
+        chooseImagePanel.OnClickToBackInRegistrationButton += HandleGoToRegistrationPanelFromChooseImagePanel;
         leadersPanel.OnClickBackButton += HandleGoToMainPanelFromLeadersPanel;
         chooseGamePanel.OnClickBackButton += HandleGoToMainPanelFromChooseGamePanel;
     }
@@ -43,6 +47,8 @@ public class UIMainMenuRoot : MonoBehaviour
         mainPanel.GoToLeadersPanel_Action -= HandleGoToLeadersPanelFromMainPanel;
 
         registrationDonePanel.OnClickToBackButton -= HandleGoToMainPanelFromRegistrationDonePanel;
+        registrationPanel.OnClickToChooseImageButton -= HandleGoToChooseImagePanelFromRegistrationPanel;
+        chooseImagePanel.OnClickToBackInRegistrationButton -= HandleGoToRegistrationPanelFromChooseImagePanel;
         leadersPanel.OnClickBackButton -= HandleGoToMainPanelFromLeadersPanel;
         chooseGamePanel.OnClickBackButton -= HandleGoToMainPanelFromChooseGamePanel;
 
@@ -53,6 +59,7 @@ public class UIMainMenuRoot : MonoBehaviour
     {
         mainPanel.Dispose();
         registrationPanel.Dispose();
+        chooseImagePanel.Dispose();
         registrationDonePanel.Dispose();
         leadersPanel.Dispose();
         chooseGamePanel.Dispose();
@@ -76,6 +83,11 @@ public class UIMainMenuRoot : MonoBehaviour
     public void OpenRegistrationPanel()
     {
         OpenPanel(registrationPanel);
+    }
+
+    public void OpenChooseImagePanel()
+    {
+        OpenPanel(chooseImagePanel);
     }
 
     public void OpenRegistrationDonePanel()
@@ -112,6 +124,8 @@ public class UIMainMenuRoot : MonoBehaviour
     public event Action OnGoToMainPanelFromRegistrationDonePanel;
     public event Action OnGoToMainPanelFromChooseGamePanel;
     public event Action OnGoToMainPanelFromLeadersPanel;
+    public event Action OnGoToRegistrationPanelFromChooseImagePanel;
+    public event Action OnGoToChooseImagePanelFromRegistrationPanel;
 
     private void HandleGoToChooseGamePanelFromMainPanel()
     {
@@ -136,6 +150,16 @@ public class UIMainMenuRoot : MonoBehaviour
     private void HandleGoToMainPanelFromChooseGamePanel()
     {
         OnGoToMainPanelFromChooseGamePanel?.Invoke();
+    }
+
+    private void HandleGoToRegistrationPanelFromChooseImagePanel()
+    {
+        OnGoToRegistrationPanelFromChooseImagePanel?.Invoke();
+    }
+
+    private void HandleGoToChooseImagePanelFromRegistrationPanel()
+    {
+        OnGoToChooseImagePanelFromRegistrationPanel?.Invoke();
     }
 
 
