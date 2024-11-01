@@ -1946,6 +1946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231d1509830607e4c932bf8fa5dd61cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idComponent: 
   yatzyCombinations:
   - {fileID: 1182133253209561612}
   - {fileID: 3099843681878134437}
@@ -2561,6 +2562,67 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1630893835544033120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7325662655852852545}
+  - component: {fileID: 7930415975828799712}
+  m_Layer: 5
+  m_Name: PlayerView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7325662655852852545
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630893835544033120}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 262093092708253975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7930415975828799712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630893835544033120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ba8c3fe9b49f44d800b8743f4cae79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textNicknames:
+  - {fileID: 3046699222316092210}
+  - {fileID: 4389079867701595028}
+  imageAvatars:
+  - {fileID: 794297089421160627}
+  - {fileID: 7874745849798997676}
+  spritesAvatars:
+  - {fileID: 21300000, guid: e833d592fc38a384887694e55f973e35, type: 3}
+  - {fileID: 21300000, guid: e2c8b0b3196b4e342ac3055dddaec4f5, type: 3}
+  - {fileID: 21300000, guid: 1478e1acd86c33147a4a5a0e5be1d1c1, type: 3}
+  - {fileID: 21300000, guid: 34d1c4bc7389772438cdc5b998ac482d, type: 3}
+  - {fileID: 21300000, guid: c634e3672b3095e45816c9882a9c25aa, type: 3}
+  - {fileID: 21300000, guid: 8f4a0e3386940284c9a9b8fe766dbcb8, type: 3}
 --- !u!1 &1644935361081863832
 GameObject:
   m_ObjectHideFlags: 0
@@ -4467,6 +4529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba1d6379732a884ba392b2011ecd3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idComponent: 
   dices:
   - {fileID: 4231543621862514900}
   - {fileID: 3516592319122393215}
@@ -7804,6 +7867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbe988542f2ce84e9354df74e226e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idComponent: 
   scoreDisplays:
   - {fileID: 7933727628963187523}
   - {fileID: 5885024705706335476}
@@ -8634,6 +8698,7 @@ RectTransform:
   - {fileID: 5581625121675987355}
   - {fileID: 2086640668051119391}
   - {fileID: 5519135184467908201}
+  - {fileID: 7325662655852852545}
   m_Father: {fileID: 169065486859473004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

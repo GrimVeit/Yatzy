@@ -16,6 +16,7 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
     private DiceRollPresenter diceRollPresenter;
     private YatzyCombinationPresenter yatzyCombinationPresenter;
     private ScorePresenter scorePresenter;
+    private PlayerPresenter playerPresenter;
 
     public void Run(UIRootView uIRootView)
     {
@@ -50,6 +51,11 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
             (new ScoreModel(soundPresenter), 
             viewContainer.GetView<ScoreView>());
         scorePresenter.Initialize();
+
+        playerPresenter = new PlayerPresenter
+            (new PlayerModel(PlayerPrefsKeys.NICKNAME, PlayerPrefsKeys.IMAGE_INDEX), 
+            viewContainer.GetView<PlayerView>());
+        playerPresenter.Initialize();
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Initialize();
@@ -133,6 +139,7 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
         diceRollPresenter?.Dispose();
         yatzyCombinationPresenter?.Dispose();
         scorePresenter?.Dispose();
+        playerPresenter?.Dispose();
     }
 
     private void OnDestroy()

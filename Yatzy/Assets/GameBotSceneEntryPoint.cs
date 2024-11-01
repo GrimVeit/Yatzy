@@ -20,6 +20,7 @@ public class GameBotSceneEntryPoint : MonoBehaviour
     private DiceRollPresenter diceRollPresenter_Bot;
     private YatzyCombinationPresenter yatzyCombinationPresenter_Bot;
     private ScorePresenter scorePresenter_Bot;
+    private PlayerPresenter playerPresenter;
 
     private GameSessionPresenter gameSessionPresenter;
 
@@ -82,6 +83,12 @@ public class GameBotSceneEntryPoint : MonoBehaviour
             viewContainer.GetView<ScoreView>("Bot"));
         scorePresenter_Bot.Initialize();
 
+
+
+        playerPresenter = new PlayerPresenter
+            (new PlayerModel(PlayerPrefsKeys.NICKNAME, PlayerPrefsKeys.IMAGE_INDEX), 
+            viewContainer.GetView<PlayerView>());
+        playerPresenter.Initialize();
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Initialize();
@@ -235,6 +242,7 @@ public class GameBotSceneEntryPoint : MonoBehaviour
         diceRollPresenter_Me?.Dispose();
         yatzyCombinationPresenter_Me?.Dispose();
         scorePresenter_Me?.Dispose();
+        playerPresenter?.Dispose();
     }
 
     private void OnDestroy()
