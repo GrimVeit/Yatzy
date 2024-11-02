@@ -21,6 +21,9 @@ public class GameFriendSceneEntryPoint : MonoBehaviour
     private YatzyCombinationPresenter yatzyCombinationPresenter_Bot;
     private ScorePresenter scorePresenter_Bot;
 
+    private PlayerPresenter playerFirstPresenter;
+    private PlayerPresenter playerSecondPresenter;
+
     private GameSessionPresenter gameSessionPresenter;
 
     public void Run(UIRootView uIRootView)
@@ -46,6 +49,16 @@ public class GameFriendSceneEntryPoint : MonoBehaviour
             (new GameSessionModel(),
             viewContainer.GetView<GameSessionView>());
         gameSessionPresenter.Initialize();
+
+        playerFirstPresenter = new PlayerPresenter
+            (new PlayerLocalModel(), 
+            viewContainer.GetView<PlayerLocalView>("FirstPlayer"));
+        playerFirstPresenter.Initialize();
+
+        playerSecondPresenter = new PlayerPresenter
+            (new PlayerLocalModel(), 
+            viewContainer.GetView<PlayerLocalView>("SecondPlayer"));
+        playerSecondPresenter.Initialize();
 
 
 
@@ -177,6 +190,13 @@ public class GameFriendSceneEntryPoint : MonoBehaviour
     private void ActivateTransitionsSceneEvents()
     {
         sceneRoot.OnClickToGoMainMenuFromMainPanel += HandleGoToMainMenu;
+
+        sceneRoot.OnClickToOpenGamePanel += sceneRoot.OpenMainPanel;
+        sceneRoot.OnClickToChooseImageForFirstPlayerPanel += sceneRoot.OpenChooseImageForFirstPlayerPanel;
+        sceneRoot.OnClickToChooseImageForSecondPlayerPanel += sceneRoot.OpenChooseImageForSecondPlayerPanel;
+        sceneRoot.OnClickToGoRegistrationPanelFromChooseImageForFirstPlayerPanel += sceneRoot.OpenRegistrationPanel;
+        sceneRoot.OnClickToGoRegistrationPanelFromChooseImageForSecondPlayerPanel += sceneRoot.OpenRegistrationPanel;
+
         sceneRoot.OnClickToGoMainMenuFromWinFinishPanel += HandleGoToMainMenu;
         sceneRoot.OnClickToGoSoloGameFromWinFinishPanel += HandleGoToFriendGame;
         sceneRoot.OnClickToGoMainMenuFromLoseFinishPanel += HandleGoToMainMenu;
@@ -199,6 +219,13 @@ public class GameFriendSceneEntryPoint : MonoBehaviour
     private void DeactivateTransitionsSceneEvents()
     {
         sceneRoot.OnClickToGoMainMenuFromMainPanel -= HandleGoToMainMenu;
+
+        sceneRoot.OnClickToOpenGamePanel -= sceneRoot.OpenMainPanel;
+        sceneRoot.OnClickToChooseImageForFirstPlayerPanel -= sceneRoot.OpenChooseImageForFirstPlayerPanel;
+        sceneRoot.OnClickToChooseImageForSecondPlayerPanel -= sceneRoot.OpenChooseImageForSecondPlayerPanel;
+        sceneRoot.OnClickToGoRegistrationPanelFromChooseImageForFirstPlayerPanel -= sceneRoot.OpenRegistrationPanel;
+        sceneRoot.OnClickToGoRegistrationPanelFromChooseImageForSecondPlayerPanel -= sceneRoot.OpenRegistrationPanel;
+
         sceneRoot.OnClickToGoMainMenuFromWinFinishPanel -= HandleGoToMainMenu;
         sceneRoot.OnClickToGoSoloGameFromWinFinishPanel -= HandleGoToFriendGame;
         sceneRoot.OnClickToGoMainMenuFromLoseFinishPanel -= HandleGoToMainMenu;
@@ -230,6 +257,8 @@ public class GameFriendSceneEntryPoint : MonoBehaviour
         particleEffectPresenter?.Dispose();
         soundPresenter?.Dispose();
         bankPresenter?.Dispose();
+        playerFirstPresenter?.Dispose();
+        playerSecondPresenter?.Dispose();
 
         diceRollPresenter_Me?.Dispose();
         yatzyCombinationPresenter_Me?.Dispose();

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerModel : MonoBehaviour
+public class PlayerModel : IPlayerModel
 {
     public event Action<string> OnGetNickname;
     public event Action<int> OnGetAvatarIndex;
@@ -28,6 +28,16 @@ public class PlayerModel : MonoBehaviour
     }
 
     public void Dispose()
+    {
+
+    }
+
+    public void OnChangeNickname(string nickname)
+    {
+
+    }
+
+    public void OnChangeAvatar(int avatarIndex)
     {
 
     }

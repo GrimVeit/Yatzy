@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIGameFriendRoot : MonoBehaviour
@@ -8,6 +6,9 @@ public class UIGameFriendRoot : MonoBehaviour
     [SerializeField] private MainPanel_GameSoloScene mainPanel;
     [SerializeField] private FinishPanel_GameSoloScene finishWinPanel;
     [SerializeField] private FinishPanel_GameSoloScene finishLosePanel;
+    [SerializeField] private RegistrationPanel_FriendGamePanel registrationPanel;
+    [SerializeField] private ChooseImagePanel_MainMenuScene chooseImageForFirstPlayer;
+    [SerializeField] private ChooseImagePanel_MainMenuScene chooseImageForSecondPlayer;
 
     [Header("My panels")]
     [SerializeField] private GameButtonsPanel_BotGamePanel gameButtonsPanel_Me;
@@ -33,6 +34,9 @@ public class UIGameFriendRoot : MonoBehaviour
         mainPanel.Initialize();
         finishWinPanel.Initialize();
         finishLosePanel.Initialize();
+        registrationPanel.Initialize();
+        chooseImageForFirstPlayer.Initialize();
+        chooseImageForSecondPlayer.Initialize();
 
         gameButtonsPanel_Me.Initialize();
         rollPanel_Me.Initialize();
@@ -45,7 +49,7 @@ public class UIGameFriendRoot : MonoBehaviour
 
     public void Activate()
     {
-        OpenMainPanel();
+        OpenRegistrationPanel();
         OpenGamePanel_Me();
         OpenRollPanel_Me();
     }
@@ -60,6 +64,9 @@ public class UIGameFriendRoot : MonoBehaviour
         mainPanel.Dispose();
         finishWinPanel.Dispose();
         finishLosePanel.Dispose();
+        registrationPanel.Dispose();
+        chooseImageForFirstPlayer.Dispose();
+        chooseImageForSecondPlayer.Dispose();
 
         gameButtonsPanel_Me.Dispose();
         rollPanel_Me.Dispose();
@@ -83,6 +90,21 @@ public class UIGameFriendRoot : MonoBehaviour
     public void OpenLoseFinishPanel()
     {
         OpenPanel(finishLosePanel);
+    }
+
+    public void OpenRegistrationPanel()
+    {
+        OpenPanel(registrationPanel);
+    }
+
+    public void OpenChooseImageForFirstPlayerPanel()
+    {
+        OpenPanel(chooseImageForFirstPlayer);
+    }
+
+    public void OpenChooseImageForSecondPlayerPanel()
+    {
+        OpenPanel(chooseImageForSecondPlayer);
     }
 
 
@@ -199,6 +221,37 @@ public class UIGameFriendRoot : MonoBehaviour
     {
         add { finishLosePanel.OnGoToSoloGame += value; }
         remove { finishLosePanel.OnGoToSoloGame -= value; }
+    }
+
+
+    public event Action OnClickToOpenGamePanel
+    {
+        add { registrationPanel.OnPlay += value; }
+        remove { registrationPanel.OnPlay -= value; }
+    }
+
+    public event Action OnClickToChooseImageForFirstPlayerPanel
+    {
+        add { registrationPanel.OnChooseImageForFirstPlayer += value; }
+        remove { registrationPanel.OnChooseImageForFirstPlayer -= value; }
+    }
+
+    public event Action OnClickToChooseImageForSecondPlayerPanel
+    {
+        add { registrationPanel.OnChooseImageForSecondPlayer += value; }
+        remove { registrationPanel.OnChooseImageForSecondPlayer -= value; }
+    }
+
+    public event Action OnClickToGoRegistrationPanelFromChooseImageForFirstPlayerPanel
+    {
+        add { chooseImageForFirstPlayer.OnClickToBackInRegistrationButton += value; }
+        remove { chooseImageForFirstPlayer.OnClickToBackInRegistrationButton -= value; }
+    }
+
+    public event Action OnClickToGoRegistrationPanelFromChooseImageForSecondPlayerPanel
+    {
+        add { chooseImageForSecondPlayer.OnClickToBackInRegistrationButton += value; }
+        remove { chooseImageForSecondPlayer.OnClickToBackInRegistrationButton -= value; }
     }
 
     #endregion

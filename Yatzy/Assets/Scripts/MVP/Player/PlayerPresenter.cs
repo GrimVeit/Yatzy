@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPresenter
 {
-    private PlayerModel playerModel;
-    private PlayerView playerView;
+    private IPlayerModel playerModel;
+    private IPlayerView playerView;
 
-    public PlayerPresenter(PlayerModel playerModel, PlayerView playerView)
+    public PlayerPresenter(IPlayerModel playerModel, IPlayerView playerView)
     {
         this.playerModel = playerModel;
         this.playerView = playerView;
@@ -18,6 +19,7 @@ public class PlayerPresenter
         ActivateEvents();
 
         playerModel.Initialize();
+        playerView.Initialize();
     }
 
     public void Dispose()
@@ -25,17 +27,49 @@ public class PlayerPresenter
         DeactivateEvents();
 
         playerModel.Dispose();
+        playerView.Dispose();
     }
 
     private void ActivateEvents()
     {
+        playerView.OnChooseImage += playerModel.OnChangeAvatar;
+        playerView.OnChooseNickname += playerModel.OnChangeNickname;
+
         playerModel.OnGetAvatarIndex += playerView.ChooseAvatar;
         playerModel.OnGetNickname += playerView.ChooseNickname;
     }
 
     private void DeactivateEvents()
     {
+        playerView.OnChooseImage -= playerModel.OnChangeAvatar;
+        playerView.OnChooseNickname -= playerModel.OnChangeNickname; 
+
         playerModel.OnGetAvatarIndex -= playerView.ChooseAvatar;
         playerModel.OnGetNickname -= playerView.ChooseNickname;
     }
+}
+
+public interface IPlayerModel
+{
+    public event Action<string> OnGetNickname;
+    public event Action<int> OnGetAvatarIndex;
+
+    public void OnChangeNickname(string nickname);
+
+    public void OnChangeAvatar(int avatarIndex);
+
+    public void Initialize();
+    public void Dispose();
+}
+
+public interface IPlayerView
+{
+    public event Action<string> OnChooseNickname;
+    public event Action<int> OnChooseImage;
+
+    public void ChooseAvatar(int index);
+    public void ChooseNickname(string nickname);
+
+    public void Initialize();
+    public void Dispose();
 }
