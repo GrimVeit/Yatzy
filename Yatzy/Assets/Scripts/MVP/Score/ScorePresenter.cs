@@ -29,12 +29,14 @@ public class ScorePresenter
 
     private void ActivateEvents()
     {
+        scoreModel.OnChangeScoreForBonus += scoreView.DisplayScoreBonus;
         scoreModel.OnChangeScore_Value += scoreView.DisplayScore;
         scoreModel.OnChangeScore += scoreView.ShakeDisplay;
     }
 
     private void DeactivateEvents()
     {
+        scoreModel.OnChangeScoreForBonus -= scoreView.DisplayScoreBonus;
         scoreModel.OnChangeScore_Value -= scoreView.DisplayScore;
         scoreModel.OnChangeScore -= scoreView.ShakeDisplay;
     }
@@ -47,9 +49,9 @@ public class ScorePresenter
         remove { scoreModel.OnTakeResult -= value; }
     }
 
-    public void AddScore(int score)
+    public void AddScore(int score, bool isNumbersOnly)
     {
-        scoreModel.AddScore(score);
+        scoreModel.AddScore(score, isNumbersOnly);
     }
 
     public void TakeResult()

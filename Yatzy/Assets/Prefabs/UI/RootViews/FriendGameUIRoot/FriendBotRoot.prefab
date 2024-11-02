@@ -6867,7 +6867,7 @@ GameObject:
   - component: {fileID: 4397203900243799939}
   - component: {fileID: 4069985785346008649}
   m_Layer: 5
-  m_Name: Bet
+  m_Name: BonusSecondPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6920,7 +6920,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6/63
+  m_text: 0/63
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 322d9b1428565514281f0ec6bc9e0337, type: 2}
   m_sharedMaterial: {fileID: -2598944410967631477, guid: 322d9b1428565514281f0ec6bc9e0337, type: 2}
@@ -7510,7 +7510,7 @@ GameObject:
   - component: {fileID: 3388440138445888087}
   - component: {fileID: 3926948637654618808}
   m_Layer: 5
-  m_Name: Bet
+  m_Name: BonusFirstPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7563,7 +7563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6/63
+  m_text: 0/63
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 322d9b1428565514281f0ec6bc9e0337, type: 2}
   m_sharedMaterial: {fileID: -2598944410967631477, guid: 322d9b1428565514281f0ec6bc9e0337, type: 2}
@@ -16376,6 +16376,7 @@ MonoBehaviour:
   - {fileID: 7933727628963187523}
   - {fileID: 5885024705706335476}
   - {fileID: 5006531947542515860}
+  textScoreBonus: {fileID: 3926948637654618808}
 --- !u!114 &4160680664243569719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16393,6 +16394,7 @@ MonoBehaviour:
   - {fileID: 246375390273530277}
   - {fileID: 3470377729236459663}
   - {fileID: 5472076284659733951}
+  textScoreBonus: {fileID: 4069985785346008649}
 --- !u!1 &5273248274162377964
 GameObject:
   m_ObjectHideFlags: 0

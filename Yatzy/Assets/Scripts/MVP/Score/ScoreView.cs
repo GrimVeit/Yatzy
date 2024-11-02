@@ -10,6 +10,7 @@ public class ScoreView : View, IIdentify
     [SerializeField] private string idComponent;
 
     [SerializeField] private List<ScoreDisplay> scoreDisplays = new List<ScoreDisplay>();
+    [SerializeField] private TextMeshProUGUI textScoreBonus;
 
     private Vector3 defaultDisplayScoreSize;
 
@@ -35,6 +36,11 @@ public class ScoreView : View, IIdentify
         {
             scoreDisplays[i].DisplayScore(coins);
         }
+    }
+
+    public void DisplayScoreBonus(int score)
+    {
+        textScoreBonus.text = (score + "/63").ToString();
     }
 
     public void ShakeDisplay()

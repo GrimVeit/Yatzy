@@ -7,7 +7,7 @@ public class YatzyCombinationModel
 {
     public event Action<int, YatzyCombinationData> OnInitialize;
     public event Action OnFinishGame;
-    public event Action<int> OnGetScore;
+    public event Action<int, bool> OnGetScore;
 
     public event Action<int[], int[]> OnSetNumbersCombination;
 
@@ -112,7 +112,7 @@ public class YatzyCombinationModel
     {
         currentCountFreezeCombinations += 1;
         yatzyCombinations[currentSelectYatzyCombination.Index] = currentSelectYatzyCombination;
-        OnGetScore?.Invoke(currentSelectYatzyCombination.Score);
+        OnGetScore?.Invoke(currentSelectYatzyCombination.Score, currentSelectYatzyCombination.IsNumbersOnly);
         OnFreezeCombination_Index?.Invoke(currentSelectYatzyCombination.Index);
         currentSelectYatzyCombination = null;
         OnFreezeCombination?.Invoke();
@@ -120,7 +120,6 @@ public class YatzyCombinationModel
         if(currentCountFreezeCombinations >= maxCountCombinations)
         {
             OnFinishGame?.Invoke();
-            Debug.Log("End game");
         }
     }
 

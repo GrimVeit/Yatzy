@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ScoreModel
 {
+    public event Action<int> OnChangeScoreForBonus;
+
     public event Action<int> OnTakeResult;
     public event Action<int> OnChangeScore_Value;
     public event Action OnChangeScore;
@@ -11,6 +13,10 @@ public class ScoreModel
     private int currentRecord = 0;
 
     private ISoundProvider soundProvider;
+
+    private int maxScoreForBonus = 63;
+    private int currentScoreForBonus = 0;
+    private bool isGetBonus = false;
      
     public ScoreModel(ISoundProvider soundProvider)
     {
@@ -32,8 +38,21 @@ public class ScoreModel
         }
     }
     
-    public void AddScore(int score)
+    public void AddScore(int score, bool isNumbersOnly)
     {
+        if (isNumbersOnly)
+        {
+            currentScoreForBonus += score;
+            OnChangeScoreForBonus?.Invoke(currentScoreForBonus);
+
+            if(currentScoreForBonus >= maxScoreForBonus && !isGetBonus)
+            {
+                Debug.Log("анмся онксвем");
+                currentRecord += 35;
+                isGetBonus = true;
+            }
+        }
+
         currentRecord += score;
         OnChangeScore?.Invoke();
         OnChangeScore_Value?.Invoke(currentRecord);

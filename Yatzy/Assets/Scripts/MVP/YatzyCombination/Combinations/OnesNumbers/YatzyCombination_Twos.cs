@@ -18,6 +18,7 @@ public class YatzyCombination_Twos : YatzyCombination
     public override void Initialize(YatzyCombinationData yatzyCombinationData)
     {
         this.yatzyCombinationData = yatzyCombinationData;
+        this.yatzyCombinationData.SetIsOnlyNumbers(true);
 
         buttonChooseCombination.onClick.AddListener(HandlerClickToChooseCombinationButton);
     }

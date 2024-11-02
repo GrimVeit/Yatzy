@@ -6,6 +6,7 @@ public class YatzyCombinationData
     public int Score { get; private set; }
     public bool IsSelect { get; private set; }
     public bool IsFreeze { get; private set; }
+    public bool IsNumbersOnly { get; private set; }
 
     public YatzyCombinationData(int index, bool select = false)
     {
@@ -26,5 +27,10 @@ public class YatzyCombinationData
     public void SetFreeze(bool freeze)
     {
         IsFreeze = freeze;
+    }
+
+    public void SetIsOnlyNumbers(bool isOnlyNumbers)
+    {
+        IsNumbersOnly = isOnlyNumbers;
     }
 }

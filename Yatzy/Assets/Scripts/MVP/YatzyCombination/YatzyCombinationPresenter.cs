@@ -95,7 +95,7 @@ public class YatzyCombinationPresenter
         remove { yatzyCombinationModel.OnFinishGame -= value; }
     }
 
-    public event Action<int> OnGetScore
+    public event Action<int, bool> OnGetScore
     {
         add { yatzyCombinationModel.OnGetScore += value; }
         remove { yatzyCombinationModel.OnGetScore -= value; }
