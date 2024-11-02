@@ -67,10 +67,12 @@ public class GameEntryPoint
         rootView.SetLoadScreen(1);
         yield return rootView.ShowLoadingScreen();
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
+
         yield return LoadScene(Scenes.BOOT);
         yield return LoadScene(Scenes.GAME_SOLO);
-        yield return null;
+
+        yield return new WaitForSeconds(0.1f);
 
         var sceneEntryPoint = Object.FindObjectOfType<GameSoloSceneEntryPoint>();
         sceneEntryPoint.Run(rootView);
@@ -83,13 +85,15 @@ public class GameEntryPoint
 
     private IEnumerator LoadAndStartGameBotScene()
     {
-        rootView.SetLoadScreen(1);
+        rootView.SetLoadScreen(3);
         yield return rootView.ShowLoadingScreen();
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
+
         yield return LoadScene(Scenes.BOOT);
         yield return LoadScene(Scenes.GAME_BOT);
-        yield return null;
+
+        yield return new WaitForSeconds(0.1f);
 
         var sceneEntryPoint = Object.FindObjectOfType<GameBotSceneEntryPoint>();
         sceneEntryPoint.Run(rootView);
@@ -102,13 +106,15 @@ public class GameEntryPoint
 
     private IEnumerator LoadAndStartGameFriendScene()
     {
-        rootView.SetLoadScreen(1);
+        rootView.SetLoadScreen(2);
         yield return rootView.ShowLoadingScreen();
 
         yield return new WaitForSeconds(0.4f);
+
         yield return LoadScene(Scenes.BOOT);
         yield return LoadScene(Scenes.GAME_FRIEND);
-        yield return null;
+
+        yield return new WaitForSeconds(0.1f);
 
         var sceneEntryPoint = Object.FindObjectOfType<GameFriendSceneEntryPoint>();
         sceneEntryPoint.Run(rootView);

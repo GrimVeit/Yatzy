@@ -45,20 +45,20 @@ public class FirebaseDatabaseRealtimeView : View
 
     public void DisplayUsersRecords(Dictionary<string, int> users)
     {
-        //for (int i = 0; i < contentUsers.childCount; i++)
-        //{
-        //    Destroy(contentUsers.GetChild(i).gameObject);
-        //}
+        for (int i = 0; i < contentUsers.childCount; i++)
+        {
+            Destroy(contentUsers.GetChild(i).gameObject);
+        }
 
-        ////users = users.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        //users = users.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-        //users = users.OrderByDescending(entry => entry.Value).ToDictionary(x => x.Key, x => x.Value);
+        users = users.OrderByDescending(entry => entry.Value).ToDictionary(x => x.Key, x => x.Value);
 
-        //foreach (var item in users)
-        //{
-        //    UserGrid grid = Instantiate(userGridPrefab, contentUsers);
-        //    grid.SetData(item.Key, item.Value.ToString());
-        //}
+        foreach (var item in users)
+        {
+            UserGrid grid = Instantiate(userGridPrefab, contentUsers);
+            grid.SetData(item.Key, item.Value.ToString());
+        }
     }
 
 
