@@ -35,6 +35,8 @@ public class PlayerPresenter
         playerView.OnChooseImage += playerModel.OnChangeAvatar;
         playerView.OnChooseNickname += playerModel.OnChangeNickname;
 
+        playerModel.OnSelectIndex += playerView.Select;
+        playerModel.OnDeselectIndex += playerView.Deselect;
         playerModel.OnGetAvatarIndex += playerView.ChooseAvatar;
         playerModel.OnGetNickname += playerView.ChooseNickname;
     }
@@ -42,8 +44,10 @@ public class PlayerPresenter
     private void DeactivateEvents()
     {
         playerView.OnChooseImage -= playerModel.OnChangeAvatar;
-        playerView.OnChooseNickname -= playerModel.OnChangeNickname; 
+        playerView.OnChooseNickname -= playerModel.OnChangeNickname;
 
+        playerModel.OnSelectIndex -= playerView.Select;
+        playerModel.OnDeselectIndex -= playerView.Deselect;
         playerModel.OnGetAvatarIndex -= playerView.ChooseAvatar;
         playerModel.OnGetNickname -= playerView.ChooseNickname;
     }
@@ -51,6 +55,8 @@ public class PlayerPresenter
 
 public interface IPlayerModel
 {
+    public event Action<int> OnSelectIndex;
+    public event Action<int> OnDeselectIndex;
     public event Action<string> OnGetNickname;
     public event Action<int> OnGetAvatarIndex;
 
@@ -72,4 +78,6 @@ public interface IPlayerView
 
     public void Initialize();
     public void Dispose();
+    public void Select(int index);
+    public void Deselect(int index);
 }

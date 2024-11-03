@@ -32,6 +32,8 @@ public class FirebaseDatabaseRealtimePresenter
     {
         firebaseDatabaseRealtimeView.OnChooseImage += firebaseDatabaseRealtimeModel.ChooseImage;
 
+        firebaseDatabaseRealtimeModel.OnGetNickname += firebaseDatabaseRealtimeView.NicknameDisplay;
+        firebaseDatabaseRealtimeModel.OnGetAvatar += firebaseDatabaseRealtimeView.AvatarDisplay;
         firebaseDatabaseRealtimeModel.OnGetUsersRecords += firebaseDatabaseRealtimeView.DisplayUsersRecords;
         firebaseDatabaseRealtimeModel.OnSelectIndex += firebaseDatabaseRealtimeView.Select;
         firebaseDatabaseRealtimeModel.OnDeselectIndex += firebaseDatabaseRealtimeView.Deselect;
@@ -41,6 +43,8 @@ public class FirebaseDatabaseRealtimePresenter
     {
         firebaseDatabaseRealtimeView.OnChooseImage -= firebaseDatabaseRealtimeModel.ChooseImage;
 
+        firebaseDatabaseRealtimeModel.OnGetNickname -= firebaseDatabaseRealtimeView.NicknameDisplay;
+        firebaseDatabaseRealtimeModel.OnGetAvatar -= firebaseDatabaseRealtimeView.AvatarDisplay;
         firebaseDatabaseRealtimeModel.OnGetUsersRecords -= firebaseDatabaseRealtimeView.DisplayUsersRecords;
         firebaseDatabaseRealtimeModel.OnSelectIndex -= firebaseDatabaseRealtimeView.Select;
         firebaseDatabaseRealtimeModel.OnDeselectIndex -= firebaseDatabaseRealtimeView.Deselect;

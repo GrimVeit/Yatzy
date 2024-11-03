@@ -43,7 +43,7 @@ public class FirebaseAuthenticationModel
 
     public void Initialize()
     {
-        auth = FirebaseAuth.DefaultInstance;
+        //auth = FirebaseAuth.DefaultInstance;
         //databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 

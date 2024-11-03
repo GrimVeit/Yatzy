@@ -5,6 +5,8 @@ public class PlayerModel : IPlayerModel
 {
     public event Action<string> OnGetNickname;
     public event Action<int> OnGetAvatarIndex;
+    public event Action<int> OnSelectIndex;
+    public event Action<int> OnDeselectIndex;
 
     public string Nickname { get; private set; }
     public int AvatarIndex { get; private set; }

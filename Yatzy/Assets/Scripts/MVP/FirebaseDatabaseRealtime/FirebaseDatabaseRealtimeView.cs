@@ -15,6 +15,11 @@ public class FirebaseDatabaseRealtimeView : View
 
     [SerializeField] private List<ImageElement> imageElements = new List<ImageElement>();
 
+
+    [SerializeField] private List<TextMeshProUGUI> nicknames = new List<TextMeshProUGUI>();
+    [SerializeField] private List<Image> avatars = new List<Image>();
+    [SerializeField] private List<Sprite> avatarsSprites = new List<Sprite>();
+
     public void Initialize()
     {
         for (int i = 0; i < imageElements.Count; i++)
@@ -58,6 +63,22 @@ public class FirebaseDatabaseRealtimeView : View
         {
             UserGrid grid = Instantiate(userGridPrefab, contentUsers);
             grid.SetData(item.Key, item.Value.ToString());
+        }
+    }
+
+    public void NicknameDisplay(string nick)
+    {
+        for (int i = 0; i < nicknames.Count; i++)
+        {
+            nicknames[i].text = nick;
+        }
+    }
+
+    public void AvatarDisplay(int index)
+    {
+        for (int i = 0; i < avatars.Count; i++)
+        {
+            avatars[i].sprite = avatarsSprites[index];
         }
     }
 

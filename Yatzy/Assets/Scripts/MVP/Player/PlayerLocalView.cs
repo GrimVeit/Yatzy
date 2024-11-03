@@ -58,6 +58,16 @@ public class PlayerLocalView : View, IPlayerView, IIdentify
         }
     }
 
+    public void Select(int index)
+    {
+        imageElements[index].Select();
+    }
+
+    public void Deselect(int index)
+    {
+        imageElements[index].Deselect();
+    }
+
     #region Input
 
     private void HandlerClickToChooseImage(int index)

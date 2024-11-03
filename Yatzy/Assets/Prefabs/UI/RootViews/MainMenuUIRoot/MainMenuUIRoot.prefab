@@ -212,7 +212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4058012355547692047
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76d4f2eecf3fd4d45930d19babed4324, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e84cb94374f80648b7276897c2ead8c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 6976361121003850069}
   - component: {fileID: 699944423473504314}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Nickname
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Denzer228\u200B"
+  m_text: "\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 322d9b1428565514281f0ec6bc9e0337, type: 2}
   m_sharedMaterial: {fileID: -2598944410967631477, guid: 322d9b1428565514281f0ec6bc9e0337, type: 2}
@@ -1163,7 +1163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5160882902704632289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2901,7 +2901,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dd67a6af12335c04db4987ed7627ce88, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11582767eab95714e8a4726ee4d852ea, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3460,7 +3460,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 220d9ede4047c05489c6851d3cfeefab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 99f32ef81e898c744902d9c79a9bb0e9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3739,7 +3739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3827418720571458399
@@ -3788,7 +3788,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5668334816473974045}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -4747,6 +4747,18 @@ MonoBehaviour:
   - {fileID: 4125591567245181862}
   - {fileID: 1204989529162574101}
   - {fileID: 1936982883180104034}
+  nicknames:
+  - {fileID: 699944423473504314}
+  avatars:
+  - {fileID: 5216039804025857917}
+  - {fileID: 1735591850534153969}
+  avatarsSprites:
+  - {fileID: 21300000, guid: e833d592fc38a384887694e55f973e35, type: 3}
+  - {fileID: 21300000, guid: e2c8b0b3196b4e342ac3055dddaec4f5, type: 3}
+  - {fileID: 21300000, guid: 1478e1acd86c33147a4a5a0e5be1d1c1, type: 3}
+  - {fileID: 21300000, guid: 34d1c4bc7389772438cdc5b998ac482d, type: 3}
+  - {fileID: 21300000, guid: c634e3672b3095e45816c9882a9c25aa, type: 3}
+  - {fileID: 21300000, guid: 8f4a0e3386940284c9a9b8fe766dbcb8, type: 3}
 --- !u!1 &7121687406816057989
 GameObject:
   m_ObjectHideFlags: 0
@@ -4816,7 +4828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c36b47e20009e674db82fcec7beeb148, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e84cb94374f80648b7276897c2ead8c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6155,7 +6167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8717840068835999306}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -6742,7 +6754,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: Denzer228
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0

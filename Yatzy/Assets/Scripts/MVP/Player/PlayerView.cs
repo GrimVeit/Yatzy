@@ -39,4 +39,14 @@ public class PlayerView : View, IPlayerView
             textNicknames[i].text = nickname;
         }
     }
+
+    public void Select(int index)
+    {
+
+    }
+
+    public void Deselect(int index)
+    {
+
+    }
 }

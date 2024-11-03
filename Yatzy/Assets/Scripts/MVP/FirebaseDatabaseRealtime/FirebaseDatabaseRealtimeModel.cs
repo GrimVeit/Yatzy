@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class FirebaseDatabaseRealtimeModel
 {
+    public event Action<string> OnGetNickname;
+    public event Action<int> OnGetAvatar;
+
     public event Action<int> OnSelectIndex;
     public event Action<int> OnDeselectIndex;
 
@@ -33,6 +36,9 @@ public class FirebaseDatabaseRealtimeModel
         Record = PlayerPrefs.GetInt(PlayerPrefsKeys.GAME_RECORD, 0);
         ImageIndex = PlayerPrefs.GetInt(PlayerPrefsKeys.IMAGE_INDEX, 0);
 
+        OnGetNickname?.Invoke(Nickname);
+        OnGetAvatar?.Invoke(ImageIndex);
+
         if (auth.CurrentUser != null)
         {
             SaveLocalDataToServer();
@@ -54,6 +60,8 @@ public class FirebaseDatabaseRealtimeModel
         UserData user = new(Nickname, 0);
         string json = JsonUtility.ToJson(user);
 
+        OnGetNickname?.Invoke(Nickname);
+
         Debug.Log(Nickname + "/" + ImageIndex);
 
         databaseReference.Child("Users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
@@ -70,7 +78,8 @@ public class FirebaseDatabaseRealtimeModel
 
         ImageIndex = index;
         OnSelectIndex?.Invoke(ImageIndex);
-    }
+        OnGetAvatar?.Invoke(ImageIndex);
+}
 
 
     public void SaveLocalDataToServer()
