@@ -30,33 +30,40 @@ public class FirebaseDatabaseRealtimePresenter
 
     private void ActivateEvents()
     {
-        firebaseDatabaseRealtimeView.OnChooseImage += firebaseDatabaseRealtimeModel.ChooseImage;
+        firebaseDatabaseRealtimeView.OnChangeAvatar += firebaseDatabaseRealtimeModel.SaveChangesToServer;
 
-        firebaseDatabaseRealtimeModel.OnGetNickname += firebaseDatabaseRealtimeView.NicknameDisplay;
-        firebaseDatabaseRealtimeModel.OnGetAvatar += firebaseDatabaseRealtimeView.AvatarDisplay;
         firebaseDatabaseRealtimeModel.OnGetUsersRecords += firebaseDatabaseRealtimeView.DisplayUsersRecords;
-        firebaseDatabaseRealtimeModel.OnSelectIndex += firebaseDatabaseRealtimeView.Select;
-        firebaseDatabaseRealtimeModel.OnDeselectIndex += firebaseDatabaseRealtimeView.Deselect;
+        firebaseDatabaseRealtimeModel.OnGetNickname += firebaseDatabaseRealtimeView.TestDebugNickname;
+        firebaseDatabaseRealtimeModel.OnGetAvatar += firebaseDatabaseRealtimeView.TestDebugAvatar;
     }
-
     private void DeactivateEvents()
     {
-        firebaseDatabaseRealtimeView.OnChooseImage -= firebaseDatabaseRealtimeModel.ChooseImage;
+        firebaseDatabaseRealtimeView.OnChangeAvatar -= firebaseDatabaseRealtimeModel.SaveChangesToServer;
 
-        firebaseDatabaseRealtimeModel.OnGetNickname -= firebaseDatabaseRealtimeView.NicknameDisplay;
-        firebaseDatabaseRealtimeModel.OnGetAvatar -= firebaseDatabaseRealtimeView.AvatarDisplay;
         firebaseDatabaseRealtimeModel.OnGetUsersRecords -= firebaseDatabaseRealtimeView.DisplayUsersRecords;
-        firebaseDatabaseRealtimeModel.OnSelectIndex -= firebaseDatabaseRealtimeView.Select;
-        firebaseDatabaseRealtimeModel.OnDeselectIndex -= firebaseDatabaseRealtimeView.Deselect;
     }
+
+    #region Input
 
     public void CreateEmptyDataToServer()
     {
-        firebaseDatabaseRealtimeModel.CreateEmptyDataToServer();
+        firebaseDatabaseRealtimeModel.CreateNewAccountInServer();
     }
 
     public void DisplayUsersRecords()
     {
         firebaseDatabaseRealtimeModel.DisplayUsersRecords();
     }
+
+    public void SetNickname(string nickname)
+    {
+        firebaseDatabaseRealtimeModel.SetNickname(nickname);
+    }
+
+    public void SetAvatar(int avatar)
+    {
+        firebaseDatabaseRealtimeModel.SetAvatar(avatar);
+    }
+
+    #endregion
 }

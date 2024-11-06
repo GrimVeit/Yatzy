@@ -10,14 +10,11 @@ public class FirebaseDatabaseRealtimeModel
     public event Action<string> OnGetNickname;
     public event Action<int> OnGetAvatar;
 
-    public event Action<int> OnSelectIndex;
-    public event Action<int> OnDeselectIndex;
-
     public event Action<Dictionary<string, int>> OnGetUsersRecords;
 
     public string Nickname { get; private set; }
     public int Record { get; private set; }
-    public int ImageIndex { get; private set; }
+    public int Avatar { get; private set; }
 
     private Dictionary<string, int> userRecordsDictionary = new Dictionary<string, int>();
 
@@ -34,60 +31,55 @@ public class FirebaseDatabaseRealtimeModel
     public void Initialize()
     {
         Record = PlayerPrefs.GetInt(PlayerPrefsKeys.GAME_RECORD, 0);
-        ImageIndex = PlayerPrefs.GetInt(PlayerPrefsKeys.IMAGE_INDEX, 0);
-
-        OnGetNickname?.Invoke(Nickname);
-        OnGetAvatar?.Invoke(ImageIndex);
 
         if (auth.CurrentUser != null)
         {
-            SaveLocalDataToServer();
+            SaveChangesToServer();
             DisplayUsersRecords();
         }
     }
 
-    public void DisplayUsersRecords()
-    {
-        Coroutines.Start(GetUsersRecords());
-    }
-
-    public void CreateEmptyDataToServer()
+    public void CreateNewAccountInServer()
     {
         Nickname = auth.CurrentUser.Email.Split('@')[0];
         PlayerPrefs.SetInt(PlayerPrefsKeys.GAME_RECORD, 0);
         PlayerPrefs.SetString(PlayerPrefsKeys.NICKNAME, Nickname);
-        PlayerPrefs.SetInt(PlayerPrefsKeys.IMAGE_INDEX, ImageIndex);
-        UserData user = new(Nickname, 0);
+        PlayerPrefs.SetInt(PlayerPrefsKeys.IMAGE_INDEX, Avatar);
+        UserData user = new(Nickname, 0, Avatar);
         string json = JsonUtility.ToJson(user);
 
         OnGetNickname?.Invoke(Nickname);
 
-        Debug.Log(Nickname + "/" + ImageIndex);
+        Debug.Log(Nickname + "/" + Avatar);
 
         databaseReference.Child("Users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
     }
 
-    public void ChooseImage(int index)
+    public void SetNickname(string nickname)
     {
-        if (ImageIndex == index) return;
+        Nickname = nickname;
+        OnGetNickname?.Invoke(Nickname);
+    }
 
-        if(ImageIndex != index)
-        {
-            OnDeselectIndex?.Invoke(ImageIndex);
-        }
+    public void SetAvatar(int avatarIndex)
+    {
+        Avatar = avatarIndex;
+        OnGetAvatar?.Invoke(Avatar);
+    }
 
-        ImageIndex = index;
-        OnSelectIndex?.Invoke(ImageIndex);
-        OnGetAvatar?.Invoke(ImageIndex);
-}
-
-
-    public void SaveLocalDataToServer()
+    public void SaveChangesToServer()
     {
         Nickname = auth.CurrentUser.Email.Split('@')[0];
-        UserData user = new(Nickname, Record);
+        UserData user = new(Nickname, Record, Avatar);
         string json = JsonUtility.ToJson(user);
         databaseReference.Child("Users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
+    }
+
+    #region Records
+
+    public void DisplayUsersRecords()
+    {
+        Coroutines.Start(GetUsersRecords());
     }
 
     private IEnumerator GetUsersRecords()
@@ -117,16 +109,20 @@ public class FirebaseDatabaseRealtimeModel
 
         OnGetUsersRecords?.Invoke(userRecordsDictionary);
     }
+
+    #endregion
 }
 
 public class UserData
 {
     public string Nickname;
+    public int Avatar;
     public int Record;
 
-    public UserData(string nickname, int record)
+    public UserData(string nickname, int record, int avatar)
     {
         Nickname = nickname;
         Record = record;
+        Avatar = avatar;
     }
 }

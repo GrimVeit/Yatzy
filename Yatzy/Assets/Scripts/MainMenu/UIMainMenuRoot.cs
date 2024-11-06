@@ -6,6 +6,7 @@ public class UIMainMenuRoot : MonoBehaviour
     [SerializeField] private MainPanel_MainMenuScene mainPanel;
     [SerializeField] private RegistrationPanel_MainMenuScene registrationPanel;
     [SerializeField] private ChooseImagePanel_MainMenuScene chooseImagePanel;
+    [SerializeField] private ChooseImagePanel_MainMenuScene chooseChangeImagePanel;
     [SerializeField] private RegistrationDonePanel_MainMenuScene registrationDonePanel;
     [SerializeField] private LeadersPanel_MainMenuScene leadersPanel;
     [SerializeField] private ChooseGamePanel_MainMenuScene chooseGamePanel;
@@ -24,6 +25,7 @@ public class UIMainMenuRoot : MonoBehaviour
         mainPanel.Initialize();
         registrationPanel.Initialize();
         chooseImagePanel.Initialize();
+        chooseChangeImagePanel.Initialize();
         registrationDonePanel.Initialize();
         leadersPanel.Initialize();
         chooseGamePanel.Initialize();
@@ -37,7 +39,9 @@ public class UIMainMenuRoot : MonoBehaviour
         registrationDonePanel.OnClickToBackButton += HandleGoToMainPanelFromRegistrationDonePanel;
         registrationPanel.OnClickToChooseImageButton += HandleGoToChooseImagePanelFromRegistrationPanel;
         chooseImagePanel.OnClickToBackInRegistrationButton += HandleGoToRegistrationPanelFromChooseImagePanel;
+        chooseChangeImagePanel.OnClickToBackInRegistrationButton += HandleGoToLeadersPanelFromChooseChangeImagePanel;
         leadersPanel.OnClickBackButton += HandleGoToMainPanelFromLeadersPanel;
+        leadersPanel.OnClickToChangeAvatarButton += HandleGoToChooseChangeImagePanelFromLeadersPanel;
         chooseGamePanel.OnClickBackButton += HandleGoToMainPanelFromChooseGamePanel;
     }
 
@@ -49,7 +53,9 @@ public class UIMainMenuRoot : MonoBehaviour
         registrationDonePanel.OnClickToBackButton -= HandleGoToMainPanelFromRegistrationDonePanel;
         registrationPanel.OnClickToChooseImageButton -= HandleGoToChooseImagePanelFromRegistrationPanel;
         chooseImagePanel.OnClickToBackInRegistrationButton -= HandleGoToRegistrationPanelFromChooseImagePanel;
+        chooseChangeImagePanel.OnClickToBackInRegistrationButton -= HandleGoToLeadersPanelFromChooseChangeImagePanel;
         leadersPanel.OnClickBackButton -= HandleGoToMainPanelFromLeadersPanel;
+        leadersPanel.OnClickToChangeAvatarButton -= HandleGoToChooseChangeImagePanelFromLeadersPanel;
         chooseGamePanel.OnClickBackButton -= HandleGoToMainPanelFromChooseGamePanel;
 
         currentPanel.DeactivatePanel();
@@ -60,6 +66,7 @@ public class UIMainMenuRoot : MonoBehaviour
         mainPanel.Dispose();
         registrationPanel.Dispose();
         chooseImagePanel.Dispose();
+        chooseChangeImagePanel.Dispose();
         registrationDonePanel.Dispose();
         leadersPanel.Dispose();
         chooseGamePanel.Dispose();
@@ -88,6 +95,11 @@ public class UIMainMenuRoot : MonoBehaviour
     public void OpenChooseImagePanel()
     {
         OpenPanel(chooseImagePanel);
+    }
+
+    public void OpenChooseChangeImagePanel()
+    {
+        OpenPanel(chooseChangeImagePanel);
     }
 
     public void OpenRegistrationDonePanel()
@@ -124,7 +136,9 @@ public class UIMainMenuRoot : MonoBehaviour
     public event Action OnGoToMainPanelFromRegistrationDonePanel;
     public event Action OnGoToMainPanelFromChooseGamePanel;
     public event Action OnGoToMainPanelFromLeadersPanel;
+    public event Action OnGoToChooseChangeImagePanelFromLeadersPanel;
     public event Action OnGoToRegistrationPanelFromChooseImagePanel;
+    public event Action OnGoToLeadersPanelFromChooseChangeImagePanel;
     public event Action OnGoToChooseImagePanelFromRegistrationPanel;
 
     private void HandleGoToChooseGamePanelFromMainPanel()
@@ -147,9 +161,19 @@ public class UIMainMenuRoot : MonoBehaviour
         OnGoToMainPanelFromLeadersPanel?.Invoke();
     }
 
+    private void HandleGoToChooseChangeImagePanelFromLeadersPanel()
+    {
+        OnGoToChooseChangeImagePanelFromLeadersPanel?.Invoke();
+    }
+
     private void HandleGoToMainPanelFromChooseGamePanel()
     {
         OnGoToMainPanelFromChooseGamePanel?.Invoke();
+    }
+
+    private void HandleGoToLeadersPanelFromChooseChangeImagePanel()
+    {
+        OnGoToLeadersPanelFromChooseChangeImagePanel?.Invoke();
     }
 
     private void HandleGoToRegistrationPanelFromChooseImagePanel()

@@ -33,28 +33,30 @@ public class FirebaseAuthenticationPresenter
     private void ActivateEvents()
     {
         firebaseAuthenticationView.OnClickSignUpButton += firebaseAuthenticationModel.SignUp;
-        firebaseAuthenticationView.OnClickRandomNicknameButton += firebaseAuthenticationModel.RandomNickname;
-        firebaseAuthenticationView.OnRegisterLoginValueChanged += firebaseAuthenticationModel.ChangeEnterLoginValue;
 
-        firebaseAuthenticationModel.OnEnterRegisterLoginError += firebaseAuthenticationView.OnIncorrectRegisterLogin;
-        firebaseAuthenticationModel.OnEnterRegisterLoginSuccess += firebaseAuthenticationView.OnCorrectRegisterLogin;
-        firebaseAuthenticationModel.OnGetRandomNickname += firebaseAuthenticationView.DisplayRandomNickname;
-        firebaseAuthenticationModel.OnSignUpMessage_Action += firebaseAuthenticationView.GetMessage;
+        firebaseAuthenticationModel.OnActivate += firebaseAuthenticationView.ActivateRegistrationButton;
+        firebaseAuthenticationModel.OnDeactivate += firebaseAuthenticationView.DeactivateRegistrationButton;
     }
 
     private void DeactivateEvents()
     {
         firebaseAuthenticationView.OnClickSignUpButton -= firebaseAuthenticationModel.SignUp;
-        firebaseAuthenticationView.OnClickRandomNicknameButton -= firebaseAuthenticationModel.RandomNickname;
-        firebaseAuthenticationView.OnRegisterLoginValueChanged -= firebaseAuthenticationModel.ChangeEnterLoginValue;
 
-        firebaseAuthenticationModel.OnEnterRegisterLoginError -= firebaseAuthenticationView.OnIncorrectRegisterLogin;
-        firebaseAuthenticationModel.OnEnterRegisterLoginSuccess -= firebaseAuthenticationView.OnCorrectRegisterLogin;
-        firebaseAuthenticationModel.OnGetRandomNickname -= firebaseAuthenticationView.DisplayRandomNickname;
+        firebaseAuthenticationModel.OnActivate -= firebaseAuthenticationView.ActivateRegistrationButton;
+        firebaseAuthenticationModel.OnDeactivate -= firebaseAuthenticationView.DeactivateRegistrationButton;
     }
 
     #region Input
 
+    public void Activate()
+    {
+        firebaseAuthenticationModel.Activate();
+    }
+
+    public void Deactivate()
+    {
+        firebaseAuthenticationModel.Deactivate();
+    }
     public bool CheckAuthenticated()
     {
         return firebaseAuthenticationModel.CheckUserAuthentication();
@@ -68,6 +70,11 @@ public class FirebaseAuthenticationPresenter
     public void SignOut()
     {
         firebaseAuthenticationModel.SignOut();
+    }
+
+    public void SetNickname(string nickname)
+    {
+        firebaseAuthenticationModel.SetNickname(nickname);
     }
 
     public event Action<string> OnChangeCurrentUser

@@ -9,6 +9,10 @@ using UnityEngine.Networking;
 
 public class FirebaseAuthenticationModel
 {
+    public event Action OnActivate;
+    public event Action OnDeactivate;
+
+
     public event Action<string> OnChangeUser;
 
     public event Action OnSignIn_Action;
@@ -33,6 +37,8 @@ public class FirebaseAuthenticationModel
     private readonly Regex invalidRegex = new(@"(\.{2,}|/{2,})");
     private const string URL = "https://dinoipsum.com/api/?format=text&paragraphs=1&words=1";
 
+    public string Nickname;
+
     private ISoundProvider soundProvider;
 
     public FirebaseAuthenticationModel(FirebaseAuth auth, ISoundProvider soundProvider)
@@ -47,6 +53,21 @@ public class FirebaseAuthenticationModel
         //databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
+    public void Activate()
+    {
+        OnActivate?.Invoke();
+    }
+
+    public void Deactivate()
+    {
+        OnDeactivate?.Invoke();
+    }
+
+    public void SetNickname(string nickname)
+    {
+        Nickname = nickname;
+    }
+
     public bool CheckUserAuthentication()
     {
         if (auth.CurrentUser != null)
@@ -59,14 +80,10 @@ public class FirebaseAuthenticationModel
         }
     }
 
-    public void SignIn(string emailTextValue, string passwordTextValue)
+    public void SignUp()
     {
-        Coroutines.Start(SignInCoroutine(emailTextValue, passwordTextValue));
-    }
-
-    public void SignUp(string emailTextValue)
-    {
-        Coroutines.Start(SignUpCoroutine(emailTextValue + "@gmail.com", "123456"));
+        Debug.Log(Nickname);
+        Coroutines.Start(SignUpCoroutine(Nickname + "@gmail.com", "123456"));
     }
 
     public void SignOut()
@@ -82,67 +99,7 @@ public class FirebaseAuthenticationModel
         Coroutines.Start(DeleteAuth_Coroutine());
     }
 
-    public void ChangeEnterLoginValue(string value)
-    {
-        soundProvider.PlayOneShot("EnterText");
-
-        if (value.Length < 5)
-        {
-            OnEnterRegisterLoginError?.Invoke("Nickname must be at least 5 characters long");
-            return;
-        }
-
-        if (value.Length > 17)
-        {
-            OnEnterRegisterLoginError?.Invoke("");
-            return;
-        }
-
-        if (!mainRegex.IsMatch(value))
-        {
-            OnEnterRegisterLoginError?.Invoke("Nickname can only contain english letters, numbers, periods and slashes");
-            return;
-        }
-
-        if (invalidRegex.IsMatch(value))
-        {
-            OnEnterRegisterLoginError?.Invoke("Nickname cannot contain consencutive periods and slashes");
-            return;
-        }
-
-        if (value.EndsWith("."))
-        {
-            OnEnterRegisterLoginError?.Invoke("Nickname cannot end with a period");
-            return;
-        }
-
-        OnEnterRegisterLoginSuccess?.Invoke();
-    }
-
-    public void RandomNickname()
-    {
-        soundProvider.PlayOneShot("ClickButton");
-
-        Coroutines.Start(RandomizerCoroutine());
-    }
-
-    private IEnumerator RandomizerCoroutine()
-    {
-        UnityWebRequest request = UnityWebRequest.Get(URL);
-
-        yield return request.SendWebRequest();
-
-        if (request.result != UnityWebRequest.Result.Success)
-        {
-            Debug.Log("No randomizing nickname");
-            OnGetRandomNickname?.Invoke("NoConnect");
-            yield break;
-        }
-
-        string nick = request.downloadHandler.text;
-
-        OnGetRandomNickname?.Invoke(nick.Remove(nick.Length - 3));
-    }
+    #region Coroutines
 
     private IEnumerator SignInCoroutine(string emailTextValue, string passwordTextValue)
     {
@@ -164,8 +121,6 @@ public class FirebaseAuthenticationModel
 
     private IEnumerator SignUpCoroutine(string emailTextValue, string passwordTextValue)
     {
-        soundProvider.PlayOneShot("ClickButton");
-
         OnSignUpMessage_Action?.Invoke("Loading...");
 
         var task = auth.CreateUserWithEmailAndPasswordAsync(emailTextValue, passwordTextValue);
@@ -175,13 +130,11 @@ public class FirebaseAuthenticationModel
 
         if (task.Exception != null)
         {
-            Debug.Log("Не удалось создать аккаунт");
-            soundProvider.PlayOneShot("LoseSignUp");
+            Debug.Log("Не удалось создать аккаунт - " + task.Exception);
             OnSignUpMessage_Action?.Invoke(task.Exception.Message);
             yield break;
         }
 
-        soundProvider.PlayOneShot("SuccessSignUp");
         Debug.Log("Аккаунт создан");
         OnSignUpMessage_Action?.Invoke("Success!");
         OnChangeUser?.Invoke(auth.CurrentUser.UserId);
@@ -203,4 +156,6 @@ public class FirebaseAuthenticationModel
 
         SignOut();
     }
+
+    #endregion
 }

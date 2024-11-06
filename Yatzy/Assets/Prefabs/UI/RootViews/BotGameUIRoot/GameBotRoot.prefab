@@ -3459,8 +3459,8 @@ MonoBehaviour:
     number: 6
   minDurationRotation: 1
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.1
+  maxTimeReload: 0.14
   diceImage: {fileID: 8571992472635972153}
   buttonFreeze: {fileID: 1108112592520753193}
   imageDice: {fileID: 3437678705379440368}
@@ -8103,8 +8103,8 @@ MonoBehaviour:
     number: 6
   minDurationRotation: 1
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.1
+  maxTimeReload: 0.14
   diceImage: {fileID: 2344687970693660865}
   buttonFreeze: {fileID: 1993627970214061623}
   imageDice: {fileID: 996392047464509708}
@@ -14817,8 +14817,8 @@ MonoBehaviour:
     number: 6
   minDurationRotation: 1
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.1
+  maxTimeReload: 0.14
   diceImage: {fileID: 3857080276670303092}
   buttonFreeze: {fileID: 7094214652640286180}
   imageDice: {fileID: 7918395742050226466}
@@ -18987,8 +18987,8 @@ MonoBehaviour:
     number: 6
   minDurationRotation: 1
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.1
+  maxTimeReload: 0.14
   diceImage: {fileID: 3545510533056625019}
   buttonFreeze: {fileID: 147580294989828675}
   imageDice: {fileID: 444259636234702731}
@@ -21062,8 +21062,8 @@ MonoBehaviour:
     number: 6
   minDurationRotation: 1
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.1
+  maxTimeReload: 0.14
   diceImage: {fileID: 4376813181685466571}
   buttonFreeze: {fileID: 1956315780544593499}
   imageDice: {fileID: 2468551836581458528}

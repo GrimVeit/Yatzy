@@ -18,6 +18,9 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private FirebaseAuthenticationPresenter firebaseAuthenticationPresenter;
     private FirebaseDatabaseRealtimePresenter firebaseDatabaseRealtimePresenter;
+    private AvatarPresenter avatarPresenter;
+    private AvatarPresenter avatarPresenterChanges;
+    private NicknamePresenter nicknamePresenter;
 
     public void Run(UIRootView uIRootView)
     {
@@ -27,16 +30,6 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
-
-        soundPresenter = new SoundPresenter
-            (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
-            viewContainer.GetView<SoundView>());
-        soundPresenter.Initialize();
-
-        particleEffectPresenter = new ParticleEffectPresenter
-            (new ParticleEffectModel(),
-            viewContainer.GetView<ParticleEffectView>());
-        particleEffectPresenter.Initialize(); 
 
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
@@ -49,22 +42,49 @@ public class MainMenuEntryPoint : MonoBehaviour
                 FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
                 DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
+                soundPresenter = new SoundPresenter
+                    (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
+                    viewContainer.GetView<SoundView>());
+
+                particleEffectPresenter = new ParticleEffectPresenter
+                    (new ParticleEffectModel(),
+                    viewContainer.GetView<ParticleEffectView>());
+
+                nicknamePresenter = new NicknamePresenter
+                    (new NicknameModel(PlayerPrefsKeys.NICKNAME),
+                    viewContainer.GetView<NicknameView>());
+
+                avatarPresenter = new AvatarPresenter
+                    (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX), 
+                    viewContainer.GetView<AvatarView>("Main"));
+
+                avatarPresenterChanges = new AvatarPresenter
+                    (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX),
+                    viewContainer.GetView<AvatarView>("Changes"));
+
                 firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter
                     (new FirebaseAuthenticationModel(firebaseAuth, soundPresenter),
                     viewContainer.GetView<FirebaseAuthenticationView>());
-                firebaseAuthenticationPresenter.Initialize();
 
                 firebaseDatabaseRealtimePresenter = new FirebaseDatabaseRealtimePresenter
                     (new FirebaseDatabaseRealtimeModel(firebaseAuth, databaseReference),
                     viewContainer.GetView<FirebaseDatabaseRealtimeView>());
-                firebaseDatabaseRealtimePresenter.Initialize();
 
                 sceneRoot.SetSoundProvider(soundPresenter);
-                sceneRoot.Initialize();
+                sceneRoot.Activate();
 
                 ActivateEvents();
 
-                sceneRoot.Activate();
+
+                soundPresenter.Initialize();
+                particleEffectPresenter.Initialize();
+                nicknamePresenter.Initialize();
+                avatarPresenter.Initialize();
+                avatarPresenterChanges.Initialize();
+                firebaseAuthenticationPresenter.SignOut();
+                firebaseAuthenticationPresenter.Initialize();
+                firebaseDatabaseRealtimePresenter.Initialize();
+                sceneRoot.Initialize();
 
                 if (firebaseAuthenticationPresenter.CheckAuthenticated())
                 {
@@ -89,6 +109,14 @@ public class MainMenuEntryPoint : MonoBehaviour
     {
         ActivateTransitionsSceneEvents();
 
+        nicknamePresenter.OnCorrectNickname += firebaseAuthenticationPresenter.Activate;
+        nicknamePresenter.OnIncorrectNickname += firebaseAuthenticationPresenter.Deactivate;
+
+        nicknamePresenter.OnGetNickname += firebaseAuthenticationPresenter.SetNickname;
+        nicknamePresenter.OnGetNickname += firebaseDatabaseRealtimePresenter.SetNickname;
+        avatarPresenter.OnGetAvatar += firebaseDatabaseRealtimePresenter.SetAvatar;
+        avatarPresenterChanges.OnGetAvatar += firebaseDatabaseRealtimePresenter.SetAvatar;
+
         firebaseAuthenticationPresenter.OnSignUp += firebaseDatabaseRealtimePresenter.CreateEmptyDataToServer;
         firebaseAuthenticationPresenter.OnSignUp += firebaseDatabaseRealtimePresenter.DisplayUsersRecords;
     }
@@ -96,6 +124,17 @@ public class MainMenuEntryPoint : MonoBehaviour
     private void DeactivateEvents()
     {
         DeactivateTransitionsSceneEvents();
+
+        nicknamePresenter.OnCorrectNickname -= firebaseAuthenticationPresenter.Activate;
+        nicknamePresenter.OnIncorrectNickname -= firebaseAuthenticationPresenter.Deactivate;
+
+        nicknamePresenter.OnGetNickname -= firebaseAuthenticationPresenter.SetNickname;
+        nicknamePresenter.OnGetNickname -= firebaseDatabaseRealtimePresenter.SetNickname;
+        avatarPresenter.OnGetAvatar -= firebaseDatabaseRealtimePresenter.SetAvatar;
+        avatarPresenterChanges.OnGetAvatar -= firebaseDatabaseRealtimePresenter.SetAvatar;
+
+        firebaseAuthenticationPresenter.OnSignUp -= firebaseDatabaseRealtimePresenter.CreateEmptyDataToServer;
+        firebaseAuthenticationPresenter.OnSignUp -= firebaseDatabaseRealtimePresenter.DisplayUsersRecords;
     }
 
     private void ActivateTransitionsSceneEvents()
@@ -111,6 +150,8 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot.OnGoToChooseImagePanelFromRegistrationPanel += sceneRoot.OpenChooseImagePanel;
         sceneRoot.OnGoToRegistrationPanelFromChooseImagePanel += sceneRoot.OpenRegistrationPanel;
         sceneRoot.OnGoToMainPanelFromRegistrationDonePanel += sceneRoot.OpenMainPanel;
+        sceneRoot.OnGoToChooseChangeImagePanelFromLeadersPanel += sceneRoot.OpenChooseChangeImagePanel;
+        sceneRoot.OnGoToLeadersPanelFromChooseChangeImagePanel += sceneRoot.OpenLeadersPanel;
         firebaseAuthenticationPresenter.OnSignUp += sceneRoot.OpenRegistrationDonePanel;
     }
 
@@ -127,6 +168,8 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot.OnGoToChooseImagePanelFromRegistrationPanel -= sceneRoot.OpenChooseImagePanel;
         sceneRoot.OnGoToRegistrationPanelFromChooseImagePanel -= sceneRoot.OpenRegistrationPanel;
         sceneRoot.OnGoToMainPanelFromRegistrationDonePanel -= sceneRoot.OpenMainPanel;
+        sceneRoot.OnGoToChooseChangeImagePanelFromLeadersPanel -= sceneRoot.OpenChooseChangeImagePanel;
+        sceneRoot.OnGoToLeadersPanelFromChooseChangeImagePanel -= sceneRoot.OpenLeadersPanel;
         firebaseAuthenticationPresenter.OnSignUp -= sceneRoot.OpenRegistrationDonePanel;
     }
 
@@ -142,6 +185,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
         soundPresenter?.Dispose();
+        nicknamePresenter?.Dispose();
+        avatarPresenter?.Dispose();
+        avatarPresenterChanges?.Dispose();
         firebaseAuthenticationPresenter?.Dispose();
         firebaseDatabaseRealtimePresenter?.Dispose();
     }
