@@ -59,20 +59,16 @@ public class FirstThrow_BotState : IBotState
             {
                 //Debug.Log("Выбор чисел - ");
 
-                for (int i = 0; i < array.Length; i++)
-                {
-                    Debug.Log(array[i]);
-                }
-
                 int countMatch = ArrayComparer.CountMatches(array, diceRollProvider.Dices().Values.Select(d => d.Number).ToArray());
                 float maxKPDInCurrentNumbers = 0;
 
                 if (countMatch != 0)
                 {
-                    maxKPDInCurrentNumbers = countMatch / array.Length;
+                    maxKPDInCurrentNumbers = countMatch * 1f / array.Length;
                 }
 
                 Debug.Log("Коэффициент - " + maxKPDInCurrentNumbers);
+
                 if (maxKPDInCurrentNumbers > maxKPDinCurrentCombination)
                 {
                     maxKPDinCurrentCombination = maxKPDInCurrentNumbers;
@@ -132,14 +128,14 @@ public class FirstThrow_BotState : IBotState
         {
             foreach (var item in yatzyCombination.MatchDictionary)
             {
-                if (!item.Value)
+                if (item.Value)
                 {
                     diceRollProvider.FreezeDice(item.Key);
                     yield return new WaitForSeconds(0.5f);
                 }
-
-                diceRollProvider.StartRoll();
             }
+
+            diceRollProvider.StartRoll();
         }
         else
         {

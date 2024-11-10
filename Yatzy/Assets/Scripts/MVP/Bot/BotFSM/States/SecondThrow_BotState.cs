@@ -69,7 +69,7 @@ public class SecondThrow_BotState : IBotState
 
                 if (countMatch != 0)
                 {
-                    maxKPDInCurrentNumbers = countMatch / array.Length;
+                    maxKPDInCurrentNumbers = countMatch * 1f / array.Length;
                 }
 
                 Debug.Log("Коэффициент - " + maxKPDInCurrentNumbers);
