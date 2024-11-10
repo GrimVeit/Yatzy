@@ -23,6 +23,7 @@ public class GameBotSceneEntryPoint : MonoBehaviour
     private PlayerPresenter playerPresenter;
 
     private GameSessionPresenter gameSessionPresenter;
+    private BotPresenter botPresenter;
 
     public void Run(UIRootView uIRootView)
     {
@@ -90,6 +91,12 @@ public class GameBotSceneEntryPoint : MonoBehaviour
             viewContainer.GetView<PlayerView>());
         playerPresenter.Initialize();
 
+        botPresenter = new BotPresenter
+            (new BotModel(), 
+            viewContainer.GetView<BotView>(), 
+            new BotStateMachine(diceRollPresenter_Bot, yatzyCombinationPresenter_Bot));
+        botPresenter.Initialize();
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Initialize();
 
@@ -120,17 +127,19 @@ public class GameBotSceneEntryPoint : MonoBehaviour
 
         //Bot
         gameSessionPresenter.OnChangedToSecondUser += diceRollPresenter_Bot.StartRoll;
+        diceRollPresenter_Bot.OnStartRoll += yatzyCombinationPresenter_Bot.Deactivate;
+        diceRollPresenter_Bot.OnStopRoll += yatzyCombinationPresenter_Bot.Activate;
         yatzyCombinationPresenter_Bot.OnFreezeYatzyCombination += gameSessionPresenter.ChangeToFirstUser;
         diceRollPresenter_Bot.OnGetAllDiceValues += yatzyCombinationPresenter_Bot.SetNumbersCombination;
-        diceRollPresenter_Bot.OnStopRoll += yatzyCombinationPresenter_Bot.SelectBestCombination;
         diceRollPresenter_Bot.OnStartRoll += diceRollPresenter_Bot.DeactivateFreezeToggle;
         diceRollPresenter_Bot.OnStopRoll += diceRollPresenter_Bot.ActivateFreezeToggle;
-
-        yatzyCombinationPresenter_Bot.OnSelectCombination += yatzyCombinationPresenter_Bot.SubmitFreezeCombination;
-        yatzyCombinationPresenter_Bot.OnFreezeYatzyCombination += diceRollPresenter_Bot.Reload;
         yatzyCombinationPresenter_Bot.OnFreezeYatzyCombination += yatzyCombinationPresenter_Bot.Deactivate;
         yatzyCombinationPresenter_Bot.OnFreezeYatzyCombination += diceRollPresenter_Bot.DeactivateFreezeToggle;
         yatzyCombinationPresenter_Bot.OnGetScore += scorePresenter_Bot.AddScore;
+
+        //diceRollPresenter_Bot.OnStopRoll += yatzyCombinationPresenter_Bot.FreezeBestCombination;
+        //yatzyCombinationPresenter_Bot.OnSelectCombination += yatzyCombinationPresenter_Bot.SubmitFreezeCombination;
+        //yatzyCombinationPresenter_Bot.OnFreezeYatzyCombination += diceRollPresenter_Bot.Reload;
 
 
 

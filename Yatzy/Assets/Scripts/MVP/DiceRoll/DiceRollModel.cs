@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class DiceRollModel
 {
-    public event Action<int[]> OnGetAllDiceValues;
+    public Dictionary<int, DiceData> dices { get; private set; } = new Dictionary<int, DiceData>();
+    public event Action<int, int[]> OnGetAllDiceValues;
 
     //Фриз / анфриз кубиков
     public event Action<int> OnFreeseDice;
@@ -26,8 +27,6 @@ public class DiceRollModel
     public event Action<int[]> OnStartRoll_Indexes;
     public event Action OnStartRoll;
     public event Action OnStopRoll;
-
-    private Dictionary<int, DiceData> dices = new Dictionary<int, DiceData>();
 
     private int rolledDiceCount;
 
@@ -89,13 +88,13 @@ public class DiceRollModel
 
         dices[index] = diceData;
 
-        Debug.Log("Индекс кубика - " + index + ", Значение кубика - " + diceData.Number);
+        //Debug.Log("Индекс кубика - " + index + ", Значение кубика - " + diceData.Number);
 
         if(rolledDiceCount == 0)
         {
-            Debug.Log("Все кубики остановились");
+            //Debug.Log("Все кубики остановились");
 
-            OnGetAllDiceValues?.Invoke(dices.Values.Select(d => d.Number).ToArray());
+            OnGetAllDiceValues?.Invoke(diceRollCurrentAttempt, dices.Values.Select(d => d.Number).ToArray());
 
             OnStopRoll?.Invoke();
 
@@ -117,7 +116,7 @@ public class DiceRollModel
         OnGetFullAttempt?.Invoke();
     }
 
-    private void AllUnfreeze()
+    public void AllUnfreeze()
     {
         for (int i = 0; i < dices.Count; i++)
         {
@@ -126,6 +125,17 @@ public class DiceRollModel
                 OnUnfreeseDice?.Invoke(i);
                 dices[i].SetFrozen(false);
             }
+        }
+    }
+
+    public void UnfreezeToggle(int index)
+    {
+        if (!isActiveFreezeToggle) return;
+
+        if (dices[index].Frozen)
+        {
+            OnUnfreeseDice?.Invoke(index);
+            dices[index].SetFrozen(false);
         }
     }
 

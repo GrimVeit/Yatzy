@@ -81,7 +81,6 @@ public class MainMenuEntryPoint : MonoBehaviour
                 nicknamePresenter.Initialize();
                 avatarPresenter.Initialize();
                 avatarPresenterChanges.Initialize();
-                firebaseAuthenticationPresenter.SignOut();
                 firebaseAuthenticationPresenter.Initialize();
                 firebaseDatabaseRealtimePresenter.Initialize();
                 sceneRoot.Initialize();

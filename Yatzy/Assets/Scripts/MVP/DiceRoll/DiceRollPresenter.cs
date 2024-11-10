@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 
-public class DiceRollPresenter
+public class DiceRollPresenter : IDiceRollProvider
 {
     private DiceRollModel diceRollModel;
     private DiceRollView diceRollView;
@@ -52,7 +53,7 @@ public class DiceRollPresenter
 
     #region Input
 
-    public event Action<int[]> OnGetAllDiceValues
+    public event Action<int, int[]> OnGetAllDiceValues
     {
         add { diceRollModel.OnGetAllDiceValues += value; }
         remove { diceRollModel.OnGetAllDiceValues -= value; }
@@ -82,6 +83,8 @@ public class DiceRollPresenter
         remove { diceRollModel.OnStopRoll -= value; }
     }
 
+    public Dictionary<int, DiceData> Dices() => diceRollModel.dices;
+
     public void Reload()
     {
         diceRollModel.Reload();
@@ -90,6 +93,21 @@ public class DiceRollPresenter
     public void ActivateFreezeToggle()
     {
         diceRollModel.ActivateFreezeToggle();
+    }
+
+    public void FreezeDice(int index)
+    {
+        diceRollModel.FreezeToggle(index);
+    }
+
+    public void UnfreezeDice(int index)
+    {
+        diceRollModel.UnfreezeToggle(index);
+    }
+
+    public void UnfreezeAllDices()
+    {
+        diceRollModel.AllUnfreeze();
     }
 
     public void DeactivateFreezeToggle()
@@ -103,4 +121,17 @@ public class DiceRollPresenter
     }
 
     #endregion
+}
+
+public interface IDiceRollProvider
+{
+    public Dictionary<int, DiceData> Dices();
+    public event Action<int, int[]> OnGetAllDiceValues;
+    public event Action OnStartRoll;
+    public event Action OnStopRoll;
+    public void StartRoll();
+    public void Reload();
+    public void FreezeDice(int index);
+    public void UnfreezeDice(int index);
+    public void UnfreezeAllDices();
 }

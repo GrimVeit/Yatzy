@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 
-public class YatzyCombinationPresenter
+public class YatzyCombinationPresenter : IYatzyCombinationsProvider
 {
     private YatzyCombinationModel yatzyCombinationModel;
     private YatzyCombinationView yatzyCombinationView;
@@ -52,7 +53,7 @@ public class YatzyCombinationPresenter
 
     #region Input
 
-    public void SetNumbersCombination(int[] numbers)
+    public void SetNumbersCombination(int attempt, int[] numbers)
     {
         yatzyCombinationModel.SetNumbersCombination(numbers);
     }
@@ -67,15 +68,22 @@ public class YatzyCombinationPresenter
         yatzyCombinationModel.Deactivate();
     }
 
-    public void SelectBestCombination()
+    public void FreezeBestCombination()
     {
-        yatzyCombinationModel.SelectBestCombinationForFreeze();
+        yatzyCombinationModel.FreezeBestCombinationForFreeze();
+    }
+
+    public void FreezeCombination(int index)
+    {
+        yatzyCombinationModel.SelectCombinationForFreeze(index);
     }
 
     public void SubmitFreezeCombination()
     {
         yatzyCombinationModel.SubmitChooseCombinationToFreeze();
     }
+
+    public Dictionary<int, YatzyCombinationData> YatzyCombinations() => yatzyCombinationModel.YatzyCombinations;
 
     public event Action OnSelectCombination
     {
@@ -102,4 +110,13 @@ public class YatzyCombinationPresenter
     }
 
     #endregion
+}
+
+public interface IYatzyCombinationsProvider
+{
+    public Dictionary<int, YatzyCombinationData> YatzyCombinations();
+
+    public void FreezeCombination(int index);
+    public void FreezeBestCombination();
+    public void SubmitFreezeCombination();
 }

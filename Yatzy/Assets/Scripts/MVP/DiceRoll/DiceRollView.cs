@@ -51,7 +51,7 @@ public class DiceRollView : View, IIdentify
     {
         for (int i = 0; i < indexes.Length; i++)
         {
-            Debug.Log("Кручение кубика под индексом - " + indexes[i]);
+            //Debug.Log("Кручение кубика под индексом - " + indexes[i]);
             dices[indexes[i]].Roll();
         }
     }

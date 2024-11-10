@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class YatzyCombinationData
 {
+    public List<int[]> NumbersCombinations = new List<int[]>();
     public int Index { get; private set; }
     public int Score { get; private set; }
     public bool IsSelect { get; private set; }
@@ -12,6 +14,11 @@ public class YatzyCombinationData
     {
         Index = index;
         IsSelect = select;
+    }
+
+    public void SetCombinations(List<int[]> combinations)
+    {
+        NumbersCombinations = combinations;
     }
 
     public void SetScore(int score)

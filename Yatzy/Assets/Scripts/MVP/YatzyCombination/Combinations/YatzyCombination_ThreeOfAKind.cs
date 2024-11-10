@@ -18,6 +18,12 @@ public class YatzyCombination_ThreeOfAKind : YatzyCombination
     public override void Initialize(YatzyCombinationData yatzyCombinationData)
     {
         this.yatzyCombinationData = yatzyCombinationData;
+        List<int[]> firstList = new List<int[]>();
+        foreach (var combination in numbersCombinations)
+        {
+            firstList.Add(combination.Numbers);
+        }
+        this.yatzyCombinationData.SetCombinations(firstList);
         this.yatzyCombinationData.SetIsOnlyNumbers(false);
 
         buttonChooseCombination.onClick.AddListener(HandlerClickToChooseCombinationButton);
