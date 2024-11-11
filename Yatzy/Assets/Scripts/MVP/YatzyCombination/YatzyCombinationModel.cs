@@ -24,14 +24,17 @@ public class YatzyCombinationModel
     private int maxCountCombinations;
     private int currentCountFreezeCombinations = 0;
 
+    private ISoundProvider soundProvider;
+
 
     private YatzyCombinationData currentSelectYatzyCombination;
 
     private bool isActive = false;
 
-    public YatzyCombinationModel(int maxCountCombinations)
+    public YatzyCombinationModel(int maxCountCombinations, ISoundProvider soundProvider)
     {
         this.maxCountCombinations = maxCountCombinations;
+        this.soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -80,6 +83,8 @@ public class YatzyCombinationModel
     {
         if (!isActive) return;
 
+        soundProvider.PlayOneShot("SelectCombination");
+
         if (YatzyCombinations[yatzyCombination.Index].IsFreeze) return;
 
         if (yatzyCombination == currentSelectYatzyCombination)
@@ -108,6 +113,8 @@ public class YatzyCombinationModel
         if (!isActive) return;
 
         if (YatzyCombinations[index].IsFreeze) return;
+
+        soundProvider.PlayOneShot("SelectCombination");
 
         if (YatzyCombinations[index] == currentSelectYatzyCombination)
         {
@@ -142,6 +149,8 @@ public class YatzyCombinationModel
 
     public void SubmitChooseCombinationToFreeze()
     {
+        soundProvider.PlayOneShot("ClickEnter");
+
         currentCountFreezeCombinations += 1;
         YatzyCombinations[currentSelectYatzyCombination.Index] = currentSelectYatzyCombination;
         OnGetScore?.Invoke(currentSelectYatzyCombination.Score, currentSelectYatzyCombination.IsNumbersOnly);

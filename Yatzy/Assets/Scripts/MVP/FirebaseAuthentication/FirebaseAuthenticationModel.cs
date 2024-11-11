@@ -1,11 +1,10 @@
+using Firebase;
 using Firebase.Auth;
-using Firebase.Database;
 using System;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class FirebaseAuthenticationModel
 {
@@ -121,6 +120,7 @@ public class FirebaseAuthenticationModel
 
     private IEnumerator SignUpCoroutine(string emailTextValue, string passwordTextValue)
     {
+        OnDeactivate?.Invoke();
         OnSignUpMessage_Action?.Invoke("Loading...");
 
         var task = auth.CreateUserWithEmailAndPasswordAsync(emailTextValue, passwordTextValue);
@@ -130,11 +130,35 @@ public class FirebaseAuthenticationModel
 
         if (task.Exception != null)
         {
+            FirebaseException firebaseException = task.Exception.Flatten().InnerExceptions[0] as FirebaseException;
+            AuthError authError = (AuthError)firebaseException.ErrorCode;
+
+            Debug.Log(authError);
+
+            switch (authError)
+            {
+                case AuthError.NetworkRequestFailed:
+                    OnSignUpMessage_Action?.Invoke("Network error. Please check your internet connection.");
+                    break;
+                case AuthError.EmailAlreadyInUse:
+                    OnSignUpMessage_Action?.Invoke("This nickname is already in use.");
+                    break;
+                case AuthError.InvalidEmail:
+                    OnSignUpMessage_Action?.Invoke("Invalid nickname format.");
+                    break;
+                default:
+                    OnSignUpMessage_Action?.Invoke("Unknown error: " + authError.ToString());
+                    break;
+            }
+
+            OnActivate?.Invoke();
+            soundProvider.PlayOneShot("Error");
             Debug.Log("Не удалось создать аккаунт - " + task.Exception);
-            OnSignUpMessage_Action?.Invoke(task.Exception.Message);
             yield break;
         }
 
+        soundProvider.PlayOneShot("Done");
+        OnActivate?.Invoke();
         Debug.Log("Аккаунт создан");
         OnSignUpMessage_Action?.Invoke("Success!");
         OnChangeUser?.Invoke(auth.CurrentUser.UserId);

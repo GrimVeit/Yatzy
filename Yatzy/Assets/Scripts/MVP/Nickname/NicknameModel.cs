@@ -22,20 +22,26 @@ public class NicknameModel
 
     private readonly string keyNickname;
 
-    public NicknameModel(string keyNickname)
+    private ISoundProvider soundProvider;
+
+    public NicknameModel(string keyNickname, ISoundProvider soundProvider)
     {
         this.keyNickname = keyNickname;
+        this.soundProvider = soundProvider;
     }
 
     public void Initialize()
     {
-
+        Nickname = PlayerPrefs.GetString(keyNickname, "Error");
+        OnGetNickname?.Invoke(Nickname);
     }
 
     public void ChangeNickname(string value)
     {
         Nickname = value;
         OnGetNickname?.Invoke(Nickname);
+
+        soundProvider.PlayOneShot("TextEnter");
 
         if (value.Length < 5)
         {

@@ -16,6 +16,7 @@ public class PlayerLocalView : View, IPlayerView, IIdentify
 
     public event Action<string> OnChooseNickname;
     public event Action<int> OnChooseImage;
+    public event Action OnEnterText;
     [SerializeField] private TMP_InputField inputFieldNickname;
     [SerializeField] private List<ImageElement> imageElements = new List<ImageElement>();
     [SerializeField] private Button buttonSubmitData;
@@ -29,6 +30,7 @@ public class PlayerLocalView : View, IPlayerView, IIdentify
         }
 
         buttonSubmitData.onClick.AddListener(HandlerClickToSubmitDataButton);
+        inputFieldNickname.onValueChanged.AddListener(HandlerOnTextEnter);
     }
 
     public void Dispose()
@@ -40,6 +42,7 @@ public class PlayerLocalView : View, IPlayerView, IIdentify
         }
 
         buttonSubmitData.onClick.RemoveListener(HandlerClickToSubmitDataButton);
+        inputFieldNickname.onValueChanged.AddListener(HandlerOnTextEnter);
     }
 
     public void ChooseAvatar(int index)
@@ -73,6 +76,11 @@ public class PlayerLocalView : View, IPlayerView, IIdentify
     private void HandlerClickToChooseImage(int index)
     {
         OnChooseImage?.Invoke(index);
+    }
+
+    private void HandlerOnTextEnter(string nickname)
+    {
+        OnEnterText?.Invoke();
     }
 
     private void HandlerClickToSubmitDataButton()

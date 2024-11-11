@@ -36,6 +36,7 @@ public class FirebaseAuthenticationPresenter
 
         firebaseAuthenticationModel.OnActivate += firebaseAuthenticationView.ActivateRegistrationButton;
         firebaseAuthenticationModel.OnDeactivate += firebaseAuthenticationView.DeactivateRegistrationButton;
+        firebaseAuthenticationModel.OnSignUpMessage_Action += firebaseAuthenticationView.SetDescription;
     }
 
     private void DeactivateEvents()
@@ -44,6 +45,7 @@ public class FirebaseAuthenticationPresenter
 
         firebaseAuthenticationModel.OnActivate -= firebaseAuthenticationView.ActivateRegistrationButton;
         firebaseAuthenticationModel.OnDeactivate -= firebaseAuthenticationView.DeactivateRegistrationButton;
+        firebaseAuthenticationModel.OnSignUpMessage_Action -= firebaseAuthenticationView.SetDescription;
     }
 
     #region Input

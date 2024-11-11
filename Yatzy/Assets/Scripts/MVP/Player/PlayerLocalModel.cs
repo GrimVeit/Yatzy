@@ -12,6 +12,12 @@ public class PlayerLocalModel : IPlayerModel
     public string Nickname { get; private set; } = null;
     public int AvatarIndex { get; private set; } = 0;
 
+    private ISoundProvider soundProvider;
+    public PlayerLocalModel(ISoundProvider soundProvider)
+    {
+        this.soundProvider = soundProvider;
+    }
+
     public void Initialize()
     {
         OnGetAvatarIndex?.Invoke(AvatarIndex);
@@ -27,11 +33,15 @@ public class PlayerLocalModel : IPlayerModel
     {
         Nickname = nickname;
         OnGetNickname?.Invoke(Nickname);
+
+        soundProvider.PlayOneShot("ClickEnter");
     }
 
     public void OnChangeAvatar(int avatarIndex)
     {
         if (AvatarIndex == avatarIndex) return;
+
+        soundProvider.PlayOneShot("SelectAvatar");
 
         if (AvatarIndex != avatarIndex)
         {
@@ -41,5 +51,10 @@ public class PlayerLocalModel : IPlayerModel
         AvatarIndex = avatarIndex;
         OnSelectIndex?.Invoke(AvatarIndex);
         OnGetAvatarIndex?.Invoke(AvatarIndex);
+    }
+
+    public void EnterText()
+    {
+        soundProvider.PlayOneShot("TextEnter");
     }
 }

@@ -47,8 +47,12 @@ public class SecondThrow_BotState : IBotState
         int indexCombination = 0;
         int[] maxKPDArray = null;
 
+        var combinations = yatzyCombinationsProvider.YatzyCombinations().
+            Where(kv => !kv.Value.IsFreeze).
+            ToDictionary(kv => kv.Key, kv => kv.Value);
+
         //Цикл всех комбинаций, например тройки, ятзи, фулл хаус и тд
-        foreach (var kvp in yatzyCombinationsProvider.YatzyCombinations())
+        foreach (var kvp in combinations)
         {
             int[] currentMaxKPDArray = null;
             float maxKPDinCurrentCombination = 0;

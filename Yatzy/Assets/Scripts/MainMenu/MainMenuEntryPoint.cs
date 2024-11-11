@@ -51,15 +51,15 @@ public class MainMenuEntryPoint : MonoBehaviour
                     viewContainer.GetView<ParticleEffectView>());
 
                 nicknamePresenter = new NicknamePresenter
-                    (new NicknameModel(PlayerPrefsKeys.NICKNAME),
+                    (new NicknameModel(PlayerPrefsKeys.NICKNAME, soundPresenter),
                     viewContainer.GetView<NicknameView>());
 
                 avatarPresenter = new AvatarPresenter
-                    (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX), 
+                    (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX, soundPresenter), 
                     viewContainer.GetView<AvatarView>("Main"));
 
                 avatarPresenterChanges = new AvatarPresenter
-                    (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX),
+                    (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX, soundPresenter),
                     viewContainer.GetView<AvatarView>("Changes"));
 
                 firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter
@@ -175,6 +175,7 @@ public class MainMenuEntryPoint : MonoBehaviour
     private void Deactivate()
     {
         sceneRoot.Deactivate();
+        soundPresenter?.Dispose();
     }
 
     private void Dispose()
@@ -183,7 +184,6 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
-        soundPresenter?.Dispose();
         nicknamePresenter?.Dispose();
         avatarPresenter?.Dispose();
         avatarPresenterChanges?.Dispose();

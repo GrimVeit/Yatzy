@@ -12,9 +12,12 @@ public class AvatarModel
 
     private readonly string keyAvatar;
 
-    public AvatarModel(string keyAvatar)
+    private ISoundProvider soundProvider;
+
+    public AvatarModel(string keyAvatar, ISoundProvider soundProvider)
     {
         this.keyAvatar = keyAvatar;
+        this.soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -38,6 +41,7 @@ public class AvatarModel
             OnDeselectIndex?.Invoke(AvatarIndex);
         }
 
+        soundProvider.PlayOneShot("SelectAvatar");
         AvatarIndex = avatarIndex;
         OnSelectIndex?.Invoke(AvatarIndex);
     }

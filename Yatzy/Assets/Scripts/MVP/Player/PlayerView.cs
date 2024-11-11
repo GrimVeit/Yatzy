@@ -13,6 +13,7 @@ public class PlayerView : View, IPlayerView
 
     public event Action<string> OnChooseNickname = null;
     public event Action<int> OnChooseImage = null;
+    public event Action OnEnterText = null;
 
     public void Initialize()
     {

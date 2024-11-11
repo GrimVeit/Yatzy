@@ -17,21 +17,26 @@ public class ScoreModel
     private int maxScoreForBonus = 63;
     private int currentScoreForBonus = 0;
     private bool isGetBonus = false;
-     
-    public ScoreModel(ISoundProvider soundProvider)
+
+    private readonly string key;
+    private bool isSave;
+
+    public ScoreModel(string key,  ISoundProvider soundProvider, bool isSave)
     {
+        this.key = key;
         this.soundProvider = soundProvider;
+        this.isSave = isSave;
     }
 
     public void Initialize()
     {
-        record = PlayerPrefs.GetInt(PlayerPrefsKeys.GAME_RECORD);
+        record = PlayerPrefs.GetInt(key, 0);
     }
 
 
     public void Dispose()
     {
-        if (currentRecord > record)
+        if (currentRecord > record && isSave)
         {
             record = currentRecord;
             PlayerPrefs.SetInt(PlayerPrefsKeys.GAME_RECORD, record);

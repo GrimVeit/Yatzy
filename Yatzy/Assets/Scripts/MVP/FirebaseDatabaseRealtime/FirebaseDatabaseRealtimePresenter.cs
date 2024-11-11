@@ -30,17 +30,22 @@ public class FirebaseDatabaseRealtimePresenter
 
     private void ActivateEvents()
     {
-        firebaseDatabaseRealtimeView.OnChangeAvatar += firebaseDatabaseRealtimeModel.SaveChangesToServer;
+        firebaseDatabaseRealtimeView.OnChangeAvatar += firebaseDatabaseRealtimeModel.ChangeLocalAvatar;
 
+        firebaseDatabaseRealtimeModel.OnTryChangeLocalAvatar += firebaseDatabaseRealtimeView.TryChangeAvatarInSpawnUsers;
         firebaseDatabaseRealtimeModel.OnGetUsersRecords += firebaseDatabaseRealtimeView.DisplayUsersRecords;
         firebaseDatabaseRealtimeModel.OnGetNickname += firebaseDatabaseRealtimeView.TestDebugNickname;
         firebaseDatabaseRealtimeModel.OnGetAvatar += firebaseDatabaseRealtimeView.TestDebugAvatar;
     }
+
     private void DeactivateEvents()
     {
-        firebaseDatabaseRealtimeView.OnChangeAvatar -= firebaseDatabaseRealtimeModel.SaveChangesToServer;
+        firebaseDatabaseRealtimeView.OnChangeAvatar -= firebaseDatabaseRealtimeModel.ChangeLocalAvatar;
 
+        firebaseDatabaseRealtimeModel.OnTryChangeLocalAvatar -= firebaseDatabaseRealtimeView.TryChangeAvatarInSpawnUsers;
         firebaseDatabaseRealtimeModel.OnGetUsersRecords -= firebaseDatabaseRealtimeView.DisplayUsersRecords;
+        firebaseDatabaseRealtimeModel.OnGetNickname -= firebaseDatabaseRealtimeView.TestDebugNickname;
+        firebaseDatabaseRealtimeModel.OnGetAvatar -= firebaseDatabaseRealtimeView.TestDebugAvatar;
     }
 
     #region Input

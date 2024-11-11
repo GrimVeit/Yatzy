@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000cac37150d5ef4e9dd3a9c5b07029a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 6448855265287289478}
   buttonChooseCombination: {fileID: 5931311963896416232}
   buttonImage: {fileID: 3847690441265305738}
@@ -779,10 +780,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 5705509045514150726}
   buttonFreeze: {fileID: 3057450267611619978}
   imageDice: {fileID: 1465152417220714361}
@@ -1056,6 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a03d9ea9b67444aafc72c3c094d63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 6167113866628510014}
   buttonChooseCombination: {fileID: 188339302175452096}
   buttonImage: {fileID: 2815294374346972287}
@@ -1463,6 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55571fddefbf63b4cb1451ad3bca69d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 3287928797437173045}
   buttonChooseCombination: {fileID: 4942170141098864031}
   buttonImage: {fileID: 9078341417167050028}
@@ -1949,6 +1952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04de633ed5840e6468f38177be6ff59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 3810934020771602346}
   buttonChooseCombination: {fileID: 8879940454269783430}
   buttonImage: {fileID: 145529627500863190}
@@ -3588,6 +3592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce9ec83d9a8f3c438904f7d91a9d9e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 497503013676244753}
   buttonChooseCombination: {fileID: 7079355518902898886}
   buttonImage: {fileID: 6238522935967617397}
@@ -4595,10 +4600,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 8571992472635972153}
   buttonFreeze: {fileID: 1108112592520753193}
   imageDice: {fileID: 3437678705379440368}
@@ -6575,10 +6580,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 1590466141108277551}
   buttonFreeze: {fileID: 5273601809178280455}
   imageDice: {fileID: 8736105031795417631}
@@ -7218,10 +7223,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 3213020311665752320}
   buttonFreeze: {fileID: 8203232739655271288}
   imageDice: {fileID: 6687961358138658460}
@@ -9243,6 +9248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55571fddefbf63b4cb1451ad3bca69d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 6680112646511281825}
   buttonChooseCombination: {fileID: 3643699161892092852}
   buttonImage: {fileID: 8298672248718972526}
@@ -9472,6 +9478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e2cb8ba2b8b2742a3fbd0fbcb58586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 90398366353830098}
   buttonChooseCombination: {fileID: 6958404327975690663}
   buttonImage: {fileID: 4170718725839931190}
@@ -10708,10 +10715,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 2344687970693660865}
   buttonFreeze: {fileID: 1993627970214061623}
   imageDice: {fileID: 996392047464509708}
@@ -11777,6 +11784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce9ec83d9a8f3c438904f7d91a9d9e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 3197090339179497664}
   buttonChooseCombination: {fileID: 8473397392674320400}
   buttonImage: {fileID: 7039382873152730625}
@@ -12559,10 +12567,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 4166924229642070469}
   buttonFreeze: {fileID: 4306328812498100850}
   imageDice: {fileID: 6075265280183924285}
@@ -13675,6 +13683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5eaa2435593dc543a5535e572d572ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 6172293114016763936}
   buttonChooseCombination: {fileID: 2545147667308389903}
   buttonImage: {fileID: 6749065306560275151}
@@ -14331,6 +14340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2497ea52506059e40b1e1d5d4bc430b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 8742628628119979576}
   buttonChooseCombination: {fileID: 8733875850205996019}
   buttonImage: {fileID: 4943131333219200443}
@@ -15001,6 +15011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049dd460e80217a47838c148c9be401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 4167411720189429964}
   buttonChooseCombination: {fileID: 5785719915234835127}
   buttonImage: {fileID: 346136609138344787}
@@ -16859,6 +16870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04de633ed5840e6468f38177be6ff59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 197646461572501216}
   buttonChooseCombination: {fileID: 6080102861248689955}
   buttonImage: {fileID: 3534370963207811580}
@@ -16998,6 +17010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000cac37150d5ef4e9dd3a9c5b07029a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 3087924426901088424}
   buttonChooseCombination: {fileID: 1054850569730397026}
   buttonImage: {fileID: 6511126638897833541}
@@ -17400,6 +17413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c397681f66a9fb847ab91ea1999a358a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 1375841728255457922}
   buttonChooseCombination: {fileID: 7915453394461108535}
   buttonImage: {fileID: 3922984641696229554}
@@ -18447,6 +18461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2497ea52506059e40b1e1d5d4bc430b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 5827205129598123271}
   buttonChooseCombination: {fileID: 595473475820580089}
   buttonImage: {fileID: 1249618367090346649}
@@ -19258,10 +19273,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 3857080276670303092}
   buttonFreeze: {fileID: 7094214652640286180}
   imageDice: {fileID: 7918395742050226466}
@@ -20002,6 +20017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7da267a30475c44bfc8142c97de217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 4070862008267876126}
   buttonChooseCombination: {fileID: 7890776674612798060}
   buttonImage: {fileID: 3292230834195968212}
@@ -20505,6 +20521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbb02c15f350d74fa976040503bb6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 6568671031803065055}
   buttonChooseCombination: {fileID: 3885039172355626583}
   buttonImage: {fileID: 4818615655977100668}
@@ -21659,6 +21676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbb02c15f350d74fa976040503bb6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 7451443341791112027}
   buttonChooseCombination: {fileID: 1980309913630519351}
   buttonImage: {fileID: 3313346760385669076}
@@ -21949,6 +21967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: befa6d40a743913438d041098eb81eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 2206720090843915612}
   buttonChooseCombination: {fileID: 2501306101551378229}
   buttonImage: {fileID: 4750670076108671123}
@@ -22107,10 +22126,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 8828767965877579785}
   buttonFreeze: {fileID: 6547612100289512729}
   imageDice: {fileID: 1181691687935170252}
@@ -24330,6 +24349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a03d9ea9b67444aafc72c3c094d63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 6353296248711805206}
   buttonChooseCombination: {fileID: 3587492929226249897}
   buttonImage: {fileID: 7750467576290154770}
@@ -24719,6 +24739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049dd460e80217a47838c148c9be401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 2613386444251924961}
   buttonChooseCombination: {fileID: 2270000231526779824}
   buttonImage: {fileID: 6742060124066472364}
@@ -24971,6 +24992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c397681f66a9fb847ab91ea1999a358a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 4233824287495980754}
   buttonChooseCombination: {fileID: 9109841787984799799}
   buttonImage: {fileID: 6953352340048266164}
@@ -25129,10 +25151,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 3545510533056625019}
   buttonFreeze: {fileID: 147580294989828675}
   imageDice: {fileID: 444259636234702731}
@@ -25898,6 +25920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: befa6d40a743913438d041098eb81eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 6823696906911754000}
   buttonChooseCombination: {fileID: 2605676424349335659}
   buttonImage: {fileID: 4752403645831353187}
@@ -26114,6 +26137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5eaa2435593dc543a5535e572d572ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 5541405089752593214}
   buttonChooseCombination: {fileID: 5771492437957573104}
   buttonImage: {fileID: 1854674304374667122}
@@ -26842,6 +26866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e2cb8ba2b8b2742a3fbd0fbcb58586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 7435809858095988091}
   buttonChooseCombination: {fileID: 771314223846814648}
   buttonImage: {fileID: 8556653737865398169}
@@ -27282,6 +27307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7da267a30475c44bfc8142c97de217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numbersCombinations: []
   textScore: {fileID: 704180198586640636}
   buttonChooseCombination: {fileID: 4424802212502370293}
   buttonImage: {fileID: 2109313872645317346}
@@ -27574,10 +27600,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 4376813181685466571}
   buttonFreeze: {fileID: 1956315780544593499}
   imageDice: {fileID: 2468551836581458528}

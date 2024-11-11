@@ -10,6 +10,8 @@ public class FirebaseAuthenticationView : View
     [SerializeField] private GameObject registerButtonObject;
     [SerializeField] private Button registrationButton;
 
+    [SerializeField] private TextMeshProUGUI textDescription;
+
     public void Initialize()
     {
         registrationButton.onClick.AddListener(HandlerClickToRegistrationButton);
@@ -28,6 +30,11 @@ public class FirebaseAuthenticationView : View
     public void DeactivateRegistrationButton()
     {
         registerButtonObject.SetActive(false);
+    }
+
+    public void SetDescription(string description)
+    {
+        textDescription.text = description;
     }
 
     #region Input

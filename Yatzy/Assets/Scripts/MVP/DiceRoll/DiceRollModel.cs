@@ -38,7 +38,9 @@ public class DiceRollModel
 
     private bool isActiveFreezeToggle;
 
-    public DiceRollModel(int fullDiceCount, int fullRollAttempCount)
+    private ISoundProvider soundProvider;
+
+    public DiceRollModel(int fullDiceCount, int fullRollAttempCount, ISoundProvider soundProvider)
     {
         this.fullDiceCount = fullDiceCount;
         this.fullRollAttemptCount = fullRollAttempCount;
@@ -47,6 +49,8 @@ public class DiceRollModel
         {
             dices[i] = new DiceData(false);
         }
+
+        this.soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -76,6 +80,8 @@ public class DiceRollModel
 
         ChangeAttempts(-1);
 
+        soundProvider.PlayOneShot("ClickEnter");
+
         int[] dicesIndex = GetUnfrozenDices();
         rolledDiceCount = dicesIndex.Length;
         OnStartRoll_Indexes?.Invoke(dicesIndex);
@@ -85,6 +91,8 @@ public class DiceRollModel
     public void StopRoll(int index, DiceData diceData)
     {
         rolledDiceCount -= 1;
+
+        soundProvider.PlayOneShot("RotateCubic");
 
         dices[index] = diceData;
 
@@ -148,12 +156,14 @@ public class DiceRollModel
             if (dices[index].Frozen)
             {
                 Debug.Log("Разморозка под индексом - "+ index);
+                soundProvider.PlayOneShot("UnfreezeCubic");
                 OnUnfreeseDice?.Invoke(index);
                 dices[index].SetFrozen(false);
             }
             else
             {
                 Debug.Log("Заморозка под индексом - " + index);
+                soundProvider.PlayOneShot("FreezeCubic");
                 OnFreeseDice?.Invoke(index);
                 dices[index].SetFrozen(true);
             }

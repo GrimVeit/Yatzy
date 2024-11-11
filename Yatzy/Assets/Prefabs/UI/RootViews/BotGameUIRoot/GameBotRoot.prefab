@@ -132,7 +132,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3734876915793710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178363312683579251}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -590,10 +590,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 5705509045514150726}
   buttonFreeze: {fileID: 3057450267611619978}
   imageDice: {fileID: 1465152417220714361}
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270937268369411081}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -1580,7 +1580,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456507200614990778}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -2675,7 +2675,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196484448409778086}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -3476,10 +3476,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.1
-  maxTimeReload: 0.14
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 8571992472635972153}
   buttonFreeze: {fileID: 1108112592520753193}
   imageDice: {fileID: 3437678705379440368}
@@ -4737,7 +4737,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880237070800793053}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -4806,10 +4806,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 1590466141108277551}
   buttonFreeze: {fileID: 5273601809178280455}
   imageDice: {fileID: 8736105031795417631}
@@ -5184,7 +5184,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035823013243811544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -5253,10 +5253,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 3213020311665752320}
   buttonFreeze: {fileID: 8203232739655271288}
   imageDice: {fileID: 6687961358138658460}
@@ -7067,7 +7067,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3136096470935374373}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -8124,10 +8124,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.1
-  maxTimeReload: 0.14
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 2344687970693660865}
   buttonFreeze: {fileID: 1993627970214061623}
   imageDice: {fileID: 996392047464509708}
@@ -9301,7 +9301,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4114649472090916691}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -9370,10 +9370,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 4166924229642070469}
   buttonFreeze: {fileID: 4306328812498100850}
   imageDice: {fileID: 6075265280183924285}
@@ -10316,7 +10316,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4374899986133262985}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -10979,7 +10979,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4702467603676158131}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -11651,7 +11651,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4854619971829626895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -12290,7 +12290,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5148905328683629980}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -13905,8 +13905,8 @@ CanvasGroup:
   m_GameObject: {fileID: 5870509061980477337}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &5893022061175889374
 GameObject:
@@ -14854,10 +14854,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.1
-  maxTimeReload: 0.14
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 3857080276670303092}
   buttonFreeze: {fileID: 7094214652640286180}
   imageDice: {fileID: 7918395742050226466}
@@ -15425,7 +15425,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6310724627377676774}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -16423,7 +16423,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7024463796213178611}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -16642,7 +16642,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7145274692446620508}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -16782,7 +16782,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7166159603309502232}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -16851,10 +16851,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 845e47e29093fad43bdc5bc9443a0bc5, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.2
-  maxTimeReload: 0.2
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 8828767965877579785}
   buttonFreeze: {fileID: 6547612100289512729}
   imageDice: {fileID: 1181691687935170252}
@@ -18337,7 +18337,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7856064628314953618}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -18829,7 +18829,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7981751801376905495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -19038,10 +19038,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.1
-  maxTimeReload: 0.14
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 3545510533056625019}
   buttonFreeze: {fileID: 147580294989828675}
   imageDice: {fileID: 444259636234702731}
@@ -21117,10 +21117,10 @@ MonoBehaviour:
     number: 5
   - spriteDice: {fileID: 21300000, guid: 220b7276745d95a4d863438f78b52bba, type: 3}
     number: 6
-  minDurationRotation: 1
+  minDurationRotation: 0.3
   maxDurationRotation: 2
-  minTimeReload: 0.1
-  maxTimeReload: 0.14
+  minTimeReload: 0.07
+  maxTimeReload: 0.11
   diceImage: {fileID: 4376813181685466571}
   buttonFreeze: {fileID: 1956315780544593499}
   imageDice: {fileID: 2468551836581458528}
@@ -21211,7 +21211,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9205831711294264478}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 

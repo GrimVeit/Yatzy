@@ -10,13 +10,14 @@ public class FirebaseDatabaseRealtimeModel
     public event Action<string> OnGetNickname;
     public event Action<int> OnGetAvatar;
 
-    public event Action<Dictionary<string, int>> OnGetUsersRecords;
+    public event Action<List<UserData>> OnGetUsersRecords;
+    public event Action<string, int> OnTryChangeLocalAvatar;
 
     public string Nickname { get; private set; }
     public int Record { get; private set; }
     public int Avatar { get; private set; }
 
-    private Dictionary<string, int> userRecordsDictionary = new Dictionary<string, int>();
+    private List<UserData> userRecordsDictionary = new List<UserData>();
 
 
     private FirebaseAuth auth;
@@ -45,7 +46,7 @@ public class FirebaseDatabaseRealtimeModel
         PlayerPrefs.SetInt(PlayerPrefsKeys.GAME_RECORD, 0);
         PlayerPrefs.SetString(PlayerPrefsKeys.NICKNAME, Nickname);
         PlayerPrefs.SetInt(PlayerPrefsKeys.IMAGE_INDEX, Avatar);
-        UserData user = new(Nickname, 0, Avatar);
+        UserData user = new(Nickname, 0.ToString(), Avatar.ToString());
         string json = JsonUtility.ToJson(user);
 
         OnGetNickname?.Invoke(Nickname);
@@ -53,6 +54,11 @@ public class FirebaseDatabaseRealtimeModel
         Debug.Log(Nickname + "/" + Avatar);
 
         databaseReference.Child("Users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
+    }
+
+    public void ChangeLocalAvatar()
+    {
+        OnTryChangeLocalAvatar?.Invoke(Nickname, Avatar);
     }
 
     public void SetNickname(string nickname)
@@ -70,7 +76,7 @@ public class FirebaseDatabaseRealtimeModel
     public void SaveChangesToServer()
     {
         Nickname = auth.CurrentUser.Email.Split('@')[0];
-        UserData user = new(Nickname, Record, Avatar);
+        UserData user = new(Nickname, Record.ToString(), Avatar.ToString());
         string json = JsonUtility.ToJson(user);
         databaseReference.Child("Users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
     }
@@ -103,8 +109,9 @@ public class FirebaseDatabaseRealtimeModel
         foreach (var user in data.Children)
         {
             string name = user.Child("Nickname").Value.ToString();
-            string coins = user.Child("Record").Value.ToString();
-            userRecordsDictionary.Add(name, int.Parse(coins));
+            string record = user.Child("Record").Value.ToString();
+            string avatar = user.Child("Avatar").Value.ToString();
+            userRecordsDictionary.Add(new UserData(name, record, avatar));
         }
 
         OnGetUsersRecords?.Invoke(userRecordsDictionary);
@@ -116,10 +123,10 @@ public class FirebaseDatabaseRealtimeModel
 public class UserData
 {
     public string Nickname;
-    public int Avatar;
-    public int Record;
+    public string Avatar;
+    public string Record;
 
-    public UserData(string nickname, int record, int avatar)
+    public UserData(string nickname, string record, string avatar)
     {
         Nickname = nickname;
         Record = record;

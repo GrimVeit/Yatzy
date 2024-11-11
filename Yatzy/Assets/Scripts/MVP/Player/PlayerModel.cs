@@ -43,4 +43,9 @@ public class PlayerModel : IPlayerModel
     {
 
     }
+
+    public void EnterText()
+    {
+         
+    }
 }

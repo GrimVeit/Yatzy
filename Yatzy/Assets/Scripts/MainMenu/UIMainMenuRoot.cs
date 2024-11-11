@@ -143,46 +143,64 @@ public class UIMainMenuRoot : MonoBehaviour
 
     private void HandleGoToChooseGamePanelFromMainPanel()
     {
+        soundProvider.PlayOneShot("ClickEnter");
+
         OnGoToChooseGamePanelFromMainPanel?.Invoke();
     }
 
     private void HandleGoToLeadersPanelFromMainPanel()
     {
+        soundProvider.PlayOneShot("ClickEnter");
+
         OnGoToLeadersPanelFromMainPanel?.Invoke();
     }
 
     private void HandleGoToMainPanelFromRegistrationDonePanel()
     {
+        soundProvider.PlayOneShot("ClickEnter");
+
         OnGoToMainPanelFromRegistrationDonePanel?.Invoke();
     }
 
     private void HandleGoToMainPanelFromLeadersPanel()
     {
+        soundProvider.PlayOneShot("ClickExit");
+
         OnGoToMainPanelFromLeadersPanel?.Invoke();
     }
 
     private void HandleGoToChooseChangeImagePanelFromLeadersPanel()
     {
+        soundProvider.PlayOneShot("ClickEnter");
+
         OnGoToChooseChangeImagePanelFromLeadersPanel?.Invoke();
     }
 
     private void HandleGoToMainPanelFromChooseGamePanel()
     {
+        soundProvider.PlayOneShot("ClickExit");
+
         OnGoToMainPanelFromChooseGamePanel?.Invoke();
     }
 
     private void HandleGoToLeadersPanelFromChooseChangeImagePanel()
     {
+        soundProvider.PlayOneShot("ClickExit");
+
         OnGoToLeadersPanelFromChooseChangeImagePanel?.Invoke();
     }
 
     private void HandleGoToRegistrationPanelFromChooseImagePanel()
     {
+        soundProvider.PlayOneShot("ClickExit");
+
         OnGoToRegistrationPanelFromChooseImagePanel?.Invoke();
     }
 
     private void HandleGoToChooseImagePanelFromRegistrationPanel()
     {
+        soundProvider.PlayOneShot("ClickEnter");
+
         OnGoToChooseImagePanelFromRegistrationPanel?.Invoke();
     }
 
