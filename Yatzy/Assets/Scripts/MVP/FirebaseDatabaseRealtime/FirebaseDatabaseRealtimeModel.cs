@@ -23,10 +23,13 @@ public class FirebaseDatabaseRealtimeModel
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
 
-    public FirebaseDatabaseRealtimeModel(FirebaseAuth auth, DatabaseReference database)
+    private ISoundProvider soundProvider;
+
+    public FirebaseDatabaseRealtimeModel(FirebaseAuth auth, DatabaseReference database, ISoundProvider soundProvider)
     {
         this.auth = auth;
         this.databaseReference = database;
+        this.soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -58,6 +61,7 @@ public class FirebaseDatabaseRealtimeModel
 
     public void ChangeLocalAvatar()
     {
+        soundProvider.PlayOneShot("Done");
         OnTryChangeLocalAvatar?.Invoke(Nickname, Avatar);
     }
 

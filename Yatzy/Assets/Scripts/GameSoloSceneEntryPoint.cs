@@ -18,6 +18,9 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
     private ScorePresenter scorePresenter;
     private PlayerPresenter playerPresenter;
 
+    private YatzyEffectPresenter yatzyEffectPresenter;
+    private DiceEffectPresenter diceEffectPresenter;
+
     public void Run(UIRootView uIRootView)
     {
         sceneRoot = Instantiate(menuRootPrefab);
@@ -57,6 +60,9 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
             viewContainer.GetView<PlayerView>());
         playerPresenter.Initialize();
 
+        yatzyEffectPresenter = new YatzyEffectPresenter(new YatzyEffectModel_First(particleEffectPresenter));
+        diceEffectPresenter = new DiceEffectPresenter(new DiceEffectModel_First(particleEffectPresenter));
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Initialize();
 
@@ -80,6 +86,9 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
         yatzyCombinationPresenter.OnFreezeYatzyCombination += yatzyCombinationPresenter.Deactivate;
         yatzyCombinationPresenter.OnFreezeYatzyCombination += diceRollPresenter.DeactivateFreezeToggle;
 
+        yatzyCombinationPresenter.OnSelectCombination_Index += yatzyEffectPresenter.SetYatzyCombinationIndex;
+        diceRollPresenter.OnFreezeDice_Index += diceEffectPresenter.SetDiceIndex;
+
         yatzyCombinationPresenter.OnGetScore += scorePresenter.AddScore;
     }
 
@@ -96,6 +105,9 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
 
         yatzyCombinationPresenter.OnFreezeYatzyCombination -= diceRollPresenter.Reload;
         yatzyCombinationPresenter.OnFreezeYatzyCombination -= diceRollPresenter.DeactivateFreezeToggle;
+
+        yatzyCombinationPresenter.OnSelectCombination_Index -= yatzyEffectPresenter.SetYatzyCombinationIndex;
+        diceRollPresenter.OnFreezeDice_Index -= diceEffectPresenter.SetDiceIndex;
 
         yatzyCombinationPresenter.OnGetScore -= scorePresenter.AddScore;
     }
@@ -155,12 +167,14 @@ public class GameSoloSceneEntryPoint : MonoBehaviour
     private void HandleGoToMainMenu()
     {
         Deactivate();
+        soundPresenter.PlayOneShot("ClickEnter");
         OnGoToMainMenu?.Invoke();
     }
 
     private void HandleGoToSoloGame()
     {
         Deactivate();
+        soundPresenter.PlayOneShot("ClickEnter");
         OnGoToSoloGame?.Invoke();
     }
 

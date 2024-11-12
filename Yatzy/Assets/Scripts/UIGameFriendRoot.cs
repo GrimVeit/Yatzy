@@ -96,16 +96,19 @@ public class UIGameFriendRoot : MonoBehaviour
 
     public void OpenRegistrationPanel()
     {
+        soundProvider.PlayOneShot("ClickEnter");
         OpenPanel(registrationPanel);
     }
 
     public void OpenChooseImageForFirstPlayerPanel()
     {
+        soundProvider.PlayOneShot("ClickEnter");
         OpenPanel(chooseImageForFirstPlayer);
     }
 
     public void OpenChooseImageForSecondPlayerPanel()
     {
+        soundProvider.PlayOneShot("ClickEnter");
         OpenPanel(chooseImageForSecondPlayer);
     }
 

@@ -63,11 +63,11 @@ public class MainMenuEntryPoint : MonoBehaviour
                     viewContainer.GetView<AvatarView>("Changes"));
 
                 firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter
-                    (new FirebaseAuthenticationModel(firebaseAuth, soundPresenter),
+                    (new FirebaseAuthenticationModel(firebaseAuth, soundPresenter, particleEffectPresenter),
                     viewContainer.GetView<FirebaseAuthenticationView>());
 
                 firebaseDatabaseRealtimePresenter = new FirebaseDatabaseRealtimePresenter
-                    (new FirebaseDatabaseRealtimeModel(firebaseAuth, databaseReference),
+                    (new FirebaseDatabaseRealtimeModel(firebaseAuth, databaseReference, soundPresenter),
                     viewContainer.GetView<FirebaseDatabaseRealtimeView>());
 
                 sceneRoot.SetSoundProvider(soundPresenter);
@@ -206,18 +206,21 @@ public class MainMenuEntryPoint : MonoBehaviour
     private void HandleGoToSoloGame()
     {
         Deactivate();
+        soundPresenter.PlayOneShot("ClickEnter");
         GoToSoloGame_Action?.Invoke();
     }
 
     private void HandleGoToBotGame()
     {
         Deactivate();
+        soundPresenter.PlayOneShot("ClickEnter");
         GoToBotGame_Action?.Invoke();
     }
 
     private void HandlerGoToFriendGame()
     {
         Deactivate();
+        soundPresenter.PlayOneShot("ClickEnter");
         GoToFriendGame_Action?.Invoke();
     }
 

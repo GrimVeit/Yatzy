@@ -97,6 +97,24 @@ public class YatzyCombinationPresenter : IYatzyCombinationsProvider
         remove { yatzyCombinationModel.OnFreezeCombination -= value; }
     }
 
+    public event Action<int> OnSelectCombination_Index
+    {
+        add { yatzyCombinationModel.OnSelectCombination_Index += value; }
+        remove { yatzyCombinationModel.OnSelectCombination_Index -= value; }
+    }
+
+    public event Action<int> OnUnselectCombination_Index
+    {
+        add { yatzyCombinationModel.OnUnselectCombination_Index += value; }
+        remove { yatzyCombinationModel.OnUnselectCombination_Index -= value; }
+    }
+
+    public event Action<int> OnFreezeCombination_Index
+    {
+        add { yatzyCombinationModel.OnFreezeCombination_Index += value; }
+        remove { yatzyCombinationModel.OnFreezeCombination_Index -= value; }
+    }
+
     public event Action OnFinishGame
     {
         add { yatzyCombinationModel.OnFinishGame += value; }

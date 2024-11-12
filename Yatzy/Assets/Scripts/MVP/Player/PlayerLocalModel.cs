@@ -34,7 +34,7 @@ public class PlayerLocalModel : IPlayerModel
         Nickname = nickname;
         OnGetNickname?.Invoke(Nickname);
 
-        soundProvider.PlayOneShot("ClickEnter");
+        soundProvider.PlayOneShot("Done");
     }
 
     public void OnChangeAvatar(int avatarIndex)

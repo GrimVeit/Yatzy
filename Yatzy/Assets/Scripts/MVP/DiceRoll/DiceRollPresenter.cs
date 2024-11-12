@@ -48,10 +48,35 @@ public class DiceRollPresenter : IDiceRollProvider
 
     private void DeactivateEvents()
     {
+        diceRollView.OnClickToRollButton -= diceRollModel.StartRoll;
+        diceRollView.OnStoppedDice_Action -= diceRollModel.StopRoll;
+        diceRollView.OnClickToDice -= diceRollModel.FreezeToggle;
 
+        diceRollModel.OnStartRoll_Indexes -= diceRollView.Roll;
+        diceRollModel.OnChangedAttemptsCount -= diceRollView.OnChangeAttempts;
+
+        diceRollModel.OnGetFullAttempt -= diceRollView.ActivateButton;
+        diceRollModel.OnStartRoll -= diceRollView.DeactivateButton;
+        diceRollModel.OnActivateRoll -= diceRollView.ActivateButton;
+        diceRollModel.OnDeactivateRoll -= diceRollView.DeactivateButton;
+
+        diceRollModel.OnFreeseDice -= diceRollView.FreezeDice;
+        diceRollModel.OnUnfreeseDice -= diceRollView.UnfreeseDice;
     }
 
     #region Input
+
+    public event Action<int> OnFreezeDice_Index
+    {
+        add { diceRollModel.OnFreeseDice += value; }
+        remove { diceRollModel.OnFreeseDice -= value; }
+    }
+
+    public event Action<int> OnUnfreezeDice_Index
+    {
+        add { diceRollModel.OnUnfreeseDice += value; }
+        remove { diceRollModel.OnUnfreeseDice -= value; }
+    }
 
     public event Action<int, int[]> OnGetAllDiceValues
     {

@@ -39,11 +39,13 @@ public class FirebaseAuthenticationModel
     public string Nickname;
 
     private ISoundProvider soundProvider;
+    private IParticleEffectProvider particleEffectProvider;
 
-    public FirebaseAuthenticationModel(FirebaseAuth auth, ISoundProvider soundProvider)
+    public FirebaseAuthenticationModel(FirebaseAuth auth, ISoundProvider soundProvider, IParticleEffectProvider particleEffectProvider)
     {
         this.auth = auth;
         this.soundProvider = soundProvider;
+        this.particleEffectProvider = particleEffectProvider;
     }
 
     public void Initialize()
@@ -158,6 +160,8 @@ public class FirebaseAuthenticationModel
         }
 
         soundProvider.PlayOneShot("Done");
+        particleEffectProvider.Play("SuccessRegistration");
+
         OnActivate?.Invoke();
         Debug.Log("Аккаунт создан");
         OnSignUpMessage_Action?.Invoke("Success!");

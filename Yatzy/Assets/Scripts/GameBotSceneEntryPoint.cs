@@ -25,6 +25,11 @@ public class GameBotSceneEntryPoint : MonoBehaviour
     private GameSessionPresenter gameSessionPresenter;
     private BotPresenter botPresenter;
 
+    private YatzyEffectPresenter yatzyEffectPresenter_Me;
+    private YatzyEffectPresenter yatzyEffectPresenter_Bot;
+    private DiceEffectPresenter diceEffectPresenter_Me;
+    private DiceEffectPresenter diceEffectPresenter_Bot;
+
     public void Run(UIRootView uIRootView)
     {
         sceneRoot = Instantiate(menuRootPrefab);
@@ -97,6 +102,11 @@ public class GameBotSceneEntryPoint : MonoBehaviour
             new BotStateMachine(diceRollPresenter_Bot, yatzyCombinationPresenter_Bot));
         botPresenter.Initialize();
 
+        yatzyEffectPresenter_Me = new YatzyEffectPresenter(new YatzyEffectModel_First(particleEffectPresenter));
+        yatzyEffectPresenter_Bot = new YatzyEffectPresenter(new YatzyEffectModel_Second(particleEffectPresenter));
+        diceEffectPresenter_Me = new DiceEffectPresenter(new DiceEffectModel_First(particleEffectPresenter));
+        diceEffectPresenter_Bot = new DiceEffectPresenter(new DiceEffectModel_Second(particleEffectPresenter));
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Initialize();
 
@@ -148,6 +158,11 @@ public class GameBotSceneEntryPoint : MonoBehaviour
 
         scorePresenter_Me.OnTakeResult += gameSessionPresenter.SetScoreResult;
         scorePresenter_Bot.OnTakeResult += gameSessionPresenter.SetScoreResult;
+
+        yatzyCombinationPresenter_Me.OnSelectCombination_Index += yatzyEffectPresenter_Me.SetYatzyCombinationIndex;
+        yatzyCombinationPresenter_Bot.OnSelectCombination_Index += yatzyEffectPresenter_Bot.SetYatzyCombinationIndex;
+        diceRollPresenter_Me.OnFreezeDice_Index += diceEffectPresenter_Me.SetDiceIndex;
+        diceRollPresenter_Bot.OnFreezeDice_Index += diceEffectPresenter_Bot.SetDiceIndex;
     }
 
     private void DeactivateEvents()
@@ -189,6 +204,11 @@ public class GameBotSceneEntryPoint : MonoBehaviour
 
         scorePresenter_Me.OnTakeResult -= gameSessionPresenter.SetScoreResult;
         scorePresenter_Bot.OnTakeResult -= gameSessionPresenter.SetScoreResult;
+
+        yatzyCombinationPresenter_Me.OnSelectCombination_Index -= yatzyEffectPresenter_Me.SetYatzyCombinationIndex;
+        yatzyCombinationPresenter_Bot.OnSelectCombination_Index -= yatzyEffectPresenter_Bot.SetYatzyCombinationIndex;
+        diceRollPresenter_Me.OnFreezeDice_Index -= diceEffectPresenter_Me.SetDiceIndex;
+        diceRollPresenter_Bot.OnFreezeDice_Index -= diceEffectPresenter_Bot.SetDiceIndex;
     }
 
     private void ActivateTransitionsSceneEvents()
@@ -267,12 +287,14 @@ public class GameBotSceneEntryPoint : MonoBehaviour
     private void HandleGoToMainMenu()
     {
         Deactivate();
+        soundPresenter.PlayOneShot("ClickEnter");
         OnGoToMainMenu?.Invoke();
     }
 
     private void HandleGoToBotGame()
     {
         Deactivate();
+        soundPresenter.PlayOneShot("ClickEnter");
         OnGoToBotGame?.Invoke();
     }
 
