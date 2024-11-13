@@ -11,9 +11,9 @@ public class PlayerView : View, IPlayerView
 
     [SerializeField] private List<Sprite> spritesAvatars;
 
-    public event Action<string> OnChooseNickname = null;
     public event Action<int> OnChooseImage = null;
-    public event Action OnEnterText = null;
+    public event Action<string> OnSubmit;
+    public event Action<string> OnEnterNickname;
 
     public void Initialize()
     {

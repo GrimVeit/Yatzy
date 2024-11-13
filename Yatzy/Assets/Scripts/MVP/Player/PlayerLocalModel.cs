@@ -29,11 +29,10 @@ public class PlayerLocalModel : IPlayerModel
 
     }
 
-    public void OnChangeNickname(string nickname)
+    public void Submit(string nick)
     {
-        Nickname = nickname;
+        Nickname = nick;
         OnGetNickname?.Invoke(Nickname);
-
         soundProvider.PlayOneShot("Done");
     }
 
@@ -53,8 +52,10 @@ public class PlayerLocalModel : IPlayerModel
         OnGetAvatarIndex?.Invoke(AvatarIndex);
     }
 
-    public void EnterText()
+    public void OnChangeNickname(string nickname)
     {
         soundProvider.PlayOneShot("TextEnter");
+        Nickname = nickname;
+        OnGetNickname?.Invoke(Nickname);
     }
 }

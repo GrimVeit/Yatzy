@@ -14,9 +14,9 @@ public class PlayerLocalView : View, IPlayerView, IIdentify
     [SerializeField] private List<Image> imageAvatars;
     [SerializeField] private List<Sprite> spritesAvatars;
 
-    public event Action<string> OnChooseNickname;
+    public event Action<string> OnEnterNickname;
     public event Action<int> OnChooseImage;
-    public event Action OnEnterText;
+    public event Action<string> OnSubmit;
     [SerializeField] private TMP_InputField inputFieldNickname;
     [SerializeField] private List<ImageElement> imageElements = new List<ImageElement>();
     [SerializeField] private Button buttonSubmitData;
@@ -80,12 +80,12 @@ public class PlayerLocalView : View, IPlayerView, IIdentify
 
     private void HandlerOnTextEnter(string nickname)
     {
-        OnEnterText?.Invoke();
+        OnEnterNickname?.Invoke(nickname);
     }
 
     private void HandlerClickToSubmitDataButton()
     {
-        OnChooseNickname?.Invoke(inputFieldNickname.text);
+        OnSubmit?.Invoke(inputFieldNickname.text);
     }
 
     #endregion
