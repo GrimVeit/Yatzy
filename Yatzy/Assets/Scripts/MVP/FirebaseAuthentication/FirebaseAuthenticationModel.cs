@@ -149,7 +149,7 @@ public class FirebaseAuthenticationModel
                     OnSignUpMessage_Action?.Invoke("Invalid nickname format.");
                     break;
                 default:
-                    OnSignUpMessage_Action?.Invoke("Unknown error: " + authError.ToString());
+                    OnSignUpMessage_Action?.Invoke("Unknown error or network error: " + authError.ToString());
                     break;
             }
 
