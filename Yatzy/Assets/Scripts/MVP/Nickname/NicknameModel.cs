@@ -52,7 +52,7 @@ public class NicknameModel
 
         if (value.Length > 17)
         {
-            OnEnterRegisterLoginError?.Invoke("");
+            OnEnterRegisterLoginError?.Invoke("Nickname must not exceed 17 characters");
             OnIncorrectNickname?.Invoke();
             return;
         }
@@ -77,6 +77,7 @@ public class NicknameModel
             return;
         }
 
+        OnEnterRegisterLoginError?.Invoke("");
         OnCorrectNickname?.Invoke();
     }
 

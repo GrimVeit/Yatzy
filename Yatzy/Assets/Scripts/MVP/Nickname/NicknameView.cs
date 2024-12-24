@@ -11,6 +11,7 @@ public class NicknameView : View
     [SerializeField] private List<TextMeshProUGUI> textNicknames = new List<TextMeshProUGUI>();
 
     [SerializeField] private TMP_InputField inputFieldNickname;
+    [SerializeField] private TextMeshProUGUI textDescription;
 
     public void Initialize()
     {
@@ -28,6 +29,12 @@ public class NicknameView : View
         {
             textNicknames[i].text = nickname;
         }
+    }
+
+    public void DisplayDescription(string text)
+    {
+        if(textDescription != null)
+           textDescription.text = text;
     }
 
     #region Input
