@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/CountryCheckerScene.unity
+    guid: f3e9caf2ec76f9444949294e9bda522f
+  - enabled: 1
+    path: Assets/Scenes/OtherScene.unity
+    guid: 59bcb0c49ec91bd49901a918ba8a35d7
+  - enabled: 1
     path: Assets/Scenes/BootScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

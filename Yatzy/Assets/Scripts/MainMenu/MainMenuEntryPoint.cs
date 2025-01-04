@@ -31,77 +31,61 @@ public class MainMenuEntryPoint : MonoBehaviour
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
 
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+        FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
+        DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+
+        soundPresenter = new SoundPresenter
+            (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
+            viewContainer.GetView<SoundView>());
+
+        particleEffectPresenter = new ParticleEffectPresenter
+            (new ParticleEffectModel(),
+            viewContainer.GetView<ParticleEffectView>());
+
+        nicknamePresenter = new NicknamePresenter
+            (new NicknameModel(PlayerPrefsKeys.NICKNAME, soundPresenter),
+            viewContainer.GetView<NicknameView>());
+
+        avatarPresenter = new AvatarPresenter
+            (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX, soundPresenter),
+            viewContainer.GetView<AvatarView>("Main"));
+
+        avatarPresenterChanges = new AvatarPresenter
+            (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX, soundPresenter),
+            viewContainer.GetView<AvatarView>("Changes"));
+
+        firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter
+            (new FirebaseAuthenticationModel(firebaseAuth, soundPresenter, particleEffectPresenter),
+            viewContainer.GetView<FirebaseAuthenticationView>());
+
+        firebaseDatabaseRealtimePresenter = new FirebaseDatabaseRealtimePresenter
+            (new FirebaseDatabaseRealtimeModel(firebaseAuth, databaseReference, soundPresenter),
+            viewContainer.GetView<FirebaseDatabaseRealtimeView>());
+
+        sceneRoot.SetSoundProvider(soundPresenter);
+        sceneRoot.Activate();
+
+        ActivateEvents();
+
+
+        soundPresenter.Initialize();
+        particleEffectPresenter.Initialize();
+        nicknamePresenter.Initialize();
+        avatarPresenter.Initialize();
+        avatarPresenterChanges.Initialize();
+        firebaseAuthenticationPresenter.Initialize();
+        firebaseDatabaseRealtimePresenter.Initialize();
+        sceneRoot.Initialize();
+
+        if (firebaseAuthenticationPresenter.CheckAuthenticated())
         {
-
-            var dependencyStatus = task.Result;
-
-            if (dependencyStatus == DependencyStatus.Available)
-            {
-                FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
-                FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
-                DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
-
-                soundPresenter = new SoundPresenter
-                    (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
-                    viewContainer.GetView<SoundView>());
-
-                particleEffectPresenter = new ParticleEffectPresenter
-                    (new ParticleEffectModel(),
-                    viewContainer.GetView<ParticleEffectView>());
-
-                nicknamePresenter = new NicknamePresenter
-                    (new NicknameModel(PlayerPrefsKeys.NICKNAME, soundPresenter),
-                    viewContainer.GetView<NicknameView>());
-
-                avatarPresenter = new AvatarPresenter
-                    (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX, soundPresenter), 
-                    viewContainer.GetView<AvatarView>("Main"));
-
-                avatarPresenterChanges = new AvatarPresenter
-                    (new AvatarModel(PlayerPrefsKeys.IMAGE_INDEX, soundPresenter),
-                    viewContainer.GetView<AvatarView>("Changes"));
-
-                firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter
-                    (new FirebaseAuthenticationModel(firebaseAuth, soundPresenter, particleEffectPresenter),
-                    viewContainer.GetView<FirebaseAuthenticationView>());
-
-                firebaseDatabaseRealtimePresenter = new FirebaseDatabaseRealtimePresenter
-                    (new FirebaseDatabaseRealtimeModel(firebaseAuth, databaseReference, soundPresenter),
-                    viewContainer.GetView<FirebaseDatabaseRealtimeView>());
-
-                sceneRoot.SetSoundProvider(soundPresenter);
-                sceneRoot.Activate();
-
-                ActivateEvents();
-
-
-                soundPresenter.Initialize();
-                particleEffectPresenter.Initialize();
-                nicknamePresenter.Initialize();
-                avatarPresenter.Initialize();
-                avatarPresenterChanges.Initialize();
-                firebaseAuthenticationPresenter.Initialize();
-                firebaseDatabaseRealtimePresenter.Initialize();
-                sceneRoot.Initialize();
-
-                if (firebaseAuthenticationPresenter.CheckAuthenticated())
-                {
-                    sceneRoot.OpenMainPanel();
-                }
-                else
-                {
-                    sceneRoot.OpenRegistrationPanel();
-                }
-
-            }
-            else
-            {
-                Debug.LogError(string.Format(
-                  "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
-                // Firebase Unity SDK is not safe to use here.
-            }
-        });
+            sceneRoot.OpenMainPanel();
+        }
+        else
+        {
+            sceneRoot.OpenRegistrationPanel();
+        }
     }
 
     private void ActivateEvents()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,6 +51,12 @@ public class FirebaseDatabaseRealtimePresenter
 
     #region Input
 
+    public event Action<UserData> OnGetUserFromPlace
+    {
+        add { firebaseDatabaseRealtimeModel.OnGetUserFromPlace += value; }
+        remove { firebaseDatabaseRealtimeModel.OnGetUserFromPlace -= value; }
+    }
+
     public void CreateEmptyDataToServer()
     {
         firebaseDatabaseRealtimeModel.CreateNewAccountInServer();
@@ -68,6 +75,11 @@ public class FirebaseDatabaseRealtimePresenter
     public void SetAvatar(int avatar)
     {
         firebaseDatabaseRealtimeModel.SetAvatar(avatar);
+    }
+
+    public void GetUserFromPlace(int place)
+    {
+        firebaseDatabaseRealtimeModel.GetUserFromPlace(place);
     }
 
     #endregion

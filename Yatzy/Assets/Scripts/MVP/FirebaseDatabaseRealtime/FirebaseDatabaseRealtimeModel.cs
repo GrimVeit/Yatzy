@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class FirebaseDatabaseRealtimeModel
 {
+    public event Action<UserData> OnGetUserFromPlace;
     public event Action<string> OnGetNickname;
     public event Action<int> OnGetAvatar;
 
@@ -85,6 +86,11 @@ public class FirebaseDatabaseRealtimeModel
         databaseReference.Child("Users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
     }
 
+    public void GetUserFromPlace(int number)
+    {
+        Coroutines.Start(GetUser(number));
+    }
+
     #region Records
 
     public void DisplayUsersRecords()
@@ -119,6 +125,36 @@ public class FirebaseDatabaseRealtimeModel
         }
 
         OnGetUsersRecords?.Invoke(userRecordsDictionary);
+    }
+
+    private IEnumerator GetUser(int number)
+    {
+        var task = databaseReference.Child("Users").OrderByChild("Coins").LimitToFirst(number).GetValueAsync();
+
+        yield return new WaitUntil(() => task.IsCompleted);
+
+        if (task.IsFaulted)
+        {
+            Debug.Log("Error display record");
+            yield break;
+        }
+
+        DataSnapshot data = task.Result;
+
+        Debug.Log("Success " + data.ChildrenCount);
+
+        foreach (var user in data.Children)
+        {
+            string name = user.Child("Nickname").Value.ToString();
+            string record = user.Child("Record").Value.ToString();
+            string avatar = user.Child("Avatar").Value.ToString();
+            OnGetUserFromPlace?.Invoke(new UserData(name, record, avatar));
+        }
+
+        //OnGetUserFromPlace?.Invoke(new UserData(
+        //    data.Child("Nickname").Value.ToString(),
+        //    data.Child("Record").Value.ToString(),
+        //    data.Child("Avatar").Value.ToString()));
     }
 
     #endregion

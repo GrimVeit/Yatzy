@@ -20,14 +20,14 @@ public class FirebaseAuthenticationPresenter
         ActivateEvents();
 
         firebaseAuthenticationModel.Initialize();
-        firebaseAuthenticationView.Initialize();
+        firebaseAuthenticationView?.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
 
-        firebaseAuthenticationView.Dispose();
+        firebaseAuthenticationView?.Dispose();
     }
 
     private void ActivateEvents()

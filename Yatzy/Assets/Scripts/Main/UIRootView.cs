@@ -17,14 +17,18 @@ public class UIRootView : MonoBehaviour
 
     public IEnumerator ShowLoadingScreen()
     {
+        Debug.Log("Start Show");
         loadScreen.ActivatePanel();
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
+        Debug.Log("End Show");
     }
 
     public IEnumerator HideLoadingScreen()
     {
+        Debug.Log("Start Hide");
         loadScreen.DeactivatePanel();
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
+        Debug.Log("End Hide");
     }
 
     public void AttachSceneUI(GameObject sceneUI, Camera camera)

@@ -26,12 +26,12 @@ public class FirebaseDatabaseRealtimeView : View
 
     public void Initialize()
     {
-        buttonChangeAvatar.onClick.AddListener(HandlerClickToChangeAvatarButton);
+        buttonChangeAvatar?.onClick.AddListener(HandlerClickToChangeAvatarButton);
     }
 
     public void Dispose()
     {
-        buttonChangeAvatar.onClick.RemoveListener(HandlerClickToChangeAvatarButton);
+        buttonChangeAvatar?.onClick.RemoveListener(HandlerClickToChangeAvatarButton);
     }
 
     public void TestDebugAvatar(int index)
